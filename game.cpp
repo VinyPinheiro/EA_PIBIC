@@ -1,6 +1,6 @@
 #include "game.h"
 #include "imagem.h"
-#include "earth.h"
+#include "animation.h"
 
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -30,7 +30,7 @@ int Game::run()
 	bool quit = false;
 	SDL_Event e;
 
-    Earth *earth = new Earth(video);
+    Animation *earth = new Animation(video,"imgs/earth.png");
 
 	Imagem *globo = new Imagem(video,"imgs/globo.jpg");
 	globo->draw(0,0);
@@ -74,7 +74,7 @@ int Game::run()
 		}
 
 		video->erase();
-        earth->draw(now);
+        earth->draw(now,20,5,192,192);
 		video->update();
 		SDL_Delay(1);
 	}
