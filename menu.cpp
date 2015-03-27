@@ -6,6 +6,7 @@ Menu::Menu(Video *video)
 	opcao1 = new Imagem(video, "imgs/menu.png");
 	opcao2 = new Imagem(video, "imgs/menu.png");
 	opcao3 = new Imagem(video, "imgs/menu.png");
+	entenda = new Entenda(video);
 }
 
 Menu::~Menu()
@@ -42,7 +43,8 @@ Menu::onMouseButtonEvent(SDL_MouseButtonEvent event)
 	else if(event.x >= 250 && event.x < 560 &&
 		event.y >= 377 && event.y < 447)
 	{
-		cerr << "entenda"<<endl;
+		cerr << "Entenda" << endl;
+		entenda->draw();
 	}
 	return true;
 }

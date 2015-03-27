@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include "video.h"
 #include "imagem.h"
+#include "entenda.h"
 
 class Menu
 {
@@ -18,6 +19,7 @@ private:
 	Imagem *opcao1;
 	Imagem *opcao2;
 	Imagem *opcao3;
+	Entenda *entenda;
 };
 
 #endif
