@@ -1,6 +1,7 @@
 #include "game.h"
 #include "imagem.h"
 #include "animation.h"
+#include "menu.h"
 
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -31,16 +32,10 @@ int Game::run()
 	SDL_Event e;
 
     Animation *earth = new Animation(video,"imgs/earth.png");
-
-	Imagem *globo = new Imagem(video,"imgs/globo.jpg");
-	globo->draw(0,0);
-    Imagem *litio = new Imagem(video,"imgs/Litio.png");
-	litio->draw(10,40);
-	Imagem *simuladores = new Imagem(video,"imgs/Simuladores.png");
-
-    Uint32 now = SDL_GetTicks();
+    Uint32 now = SDL_GetTicks(), start = SDL_GetTicks();
     earth->startAnimation(now);
-
+	Menu *menu = new Menu(video);
+	Imagem *terra = new Imagem(video, "imgs/terra.png");
 	while(!quit)
 	{
         now = SDL_GetTicks();
@@ -54,33 +49,29 @@ int Game::run()
 			
 			if(e.type == SDL_KEYDOWN)
 			{
-				if(e.key.keysym.sym == SDLK_ESCAPE)
-				{
-					quit = true;
-				} else
-                    earth->onKeyboardEvent(e.key);
+				earth->onKeyboardEvent(e.key);
 			}
 			
 			if(e.type == SDL_MOUSEBUTTONDOWN)
 			{
-			/*	if(e.button.x >= 10 && e.button.x < 10+litio->getW() &&
-					e.button.y >= 40 && e.button.y < 40+litio->getH())
-					
+				if(now >= start + 33*2*20 || !earth->getState())
 				{
-					simuladores->draw(100,200);
-				} */
+					menu->onMouseButtonEvent(e.button);
+				}
                     earth->onMouseButtonEvent(e.button);
 			}
 		}
-
 		video->erase();
-        earth->draw(now,20,5,192,192);
+        //earth->draw(now,20,5,192,192,true);
+        
+		terra->draw(0,0,0,0,761,565,800,600);
+		if(now >= start + 33*2*20 || !earth->getState())
+		{
+			menu->draw();
+		}
 		video->update();
-		SDL_Delay(1);
 	}
 	
-	delete globo;
-	delete litio;
 	return 0;
 }
 

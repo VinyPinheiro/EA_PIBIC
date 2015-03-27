@@ -51,6 +51,23 @@ Imagem::draw(int x, int y, int x_orig, int y_orig, int w_orig, int h_orig)
 
 	SDL_RenderCopy(video->getRenderer(), textura, &origem, &destino);
 }
+void 
+Imagem::draw(int x, int y, int x_orig, int y_orig, int w_orig, int h_orig,int w_dest, int h_dest)
+{	
+    SDL_Rect destino;	
+	destino.x = x;
+	destino.y = y;
+	destino.w = w_dest;
+	destino.h = h_dest;
+	
+    SDL_Rect origem;
+    origem.x = x_orig;
+    origem.y = y_orig;
+    origem.w = w_orig;
+    origem.h = h_orig;
+
+	SDL_RenderCopy(video->getRenderer(), textura, &origem, &destino);
+}
 
 int Imagem::getW() const
 {

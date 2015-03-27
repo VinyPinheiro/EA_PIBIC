@@ -15,6 +15,7 @@ public:
 	
 	void draw(int x, int y);
 	void draw(int x, int y, int x_orig, int y_orig, int w_orig, int h_orig);
+	void draw(int x, int y, int x_orig, int y_orig, int w_orig, int h_orig,int w_dest, int h_dest);
 	int getW() const;
 	int getH() const;
 private:

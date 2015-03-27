@@ -8,6 +8,7 @@ Animation::Animation(Video *video,const string caminho)
     posx = posy = 0;
     paused = false;
     lastframe = 0;
+    state = true;
 }
 
 Animation::~Animation()
@@ -22,17 +23,24 @@ Animation::startAnimation(Uint32 now)
 }
 
 void 
-Animation::draw(Uint32 now, const int frames, const int rows, const int w, const int h)
+Animation::draw(Uint32 now, const int frames, const int rows, const int w, const int h, const bool loop)
 {
+	if(!state)
+		return;
     const Uint32 speed = 33*2;
 
     Uint32 elapsed = now - begin;
 
     int frame = elapsed / speed;
-
-    //if (frame >= frames)
-     //   frame = frames - 1;
-    frame %= frames;
+	if(loop)
+    {
+		frame %= frames;
+    }
+    else
+	{
+		if (frame >= frames)
+			frame = frames - 1;
+	}
 
     int row = frame / rows;
     int column = frame % rows;
@@ -61,6 +69,9 @@ Animation::onKeyboardEvent(SDL_KeyboardEvent event)
     case SDLK_RIGHT:
         posx += speed;
         return true;
+    case SDLK_ESCAPE:
+        state = false;;
+        return true;
     }
 
     return false;
@@ -82,3 +93,8 @@ Animation::onMouseButtonEvent(SDL_MouseButtonEvent event)
     return false;
 }
 
+bool
+Animation::getState()
+{
+	return state;
+}
