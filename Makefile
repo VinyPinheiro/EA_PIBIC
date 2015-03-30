@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -W -Wall -pedantic -ansi -g -O2
+CFLAGS = -W -Wall -pedantic -ansi -g -O2 -std=c++11
 LIBS = -lSDL2 -lSDL2_image
 
 SRC = ${wildcard *.cpp}

@@ -2,6 +2,7 @@
 #include "imagem.h"
 #include "animation.h"
 #include "menu.h"
+#include "unb.h"
 
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -10,6 +11,7 @@ using namespace std;
 
 Game::Game()
 {
+	quit = false;
 	int rc = SDL_Init(SDL_INIT_VIDEO);
 	if(rc != 0)
 	{
@@ -28,43 +30,27 @@ Game::~Game()
 
 int Game::run()
 {
-	bool quit = false;
-	SDL_Event e;
-
+	vector<SDL_Event> events;
+	UnB unb(video);
+	
     Animation *earth = new Animation(video,"imgs/earth.png");
     Uint32 now = SDL_GetTicks(), start = SDL_GetTicks();
     earth->startAnimation(now);
 	Menu *menu = new Menu(video);
 	Imagem *terra = new Imagem(video, "imgs/terra.png");
+
 	while(!quit)
 	{
         now = SDL_GetTicks();
-    
-		while( SDL_PollEvent( &e ) != 0 )
-		{
-			if(e.type == SDL_QUIT )
-			{
-				quit = true;
-			}
-			
-			if(e.type == SDL_KEYDOWN)
-			{
-				earth->onKeyboardEvent(e.key);
-			}
-			
-			if(e.type == SDL_MOUSEBUTTONDOWN)
-			{
-				if(now >= start + 33*2*20 || !earth->getState())
-				{
-					menu->onMouseButtonEvent(e.button);
-				}
-                    earth->onMouseButtonEvent(e.button);
-			}
-		}
+		events = get_events();
+		events = process_event(events);
+		unb.process_event(events);
+		
 		video->erase();
         //earth->draw(now,20,5,192,192,true);
         
-		terra->draw(0,0,0,0,761,565,800,600);
+        unb.draw(0, 0);
+		//terra->draw(0,0,0,0,761,565,800,600);
 		if(now >= start + 33*2*20 || !earth->getState())
 		{
 			menu->draw();
@@ -75,3 +61,27 @@ int Game::run()
 	return 0;
 }
 
+vector<SDL_Event> Game::get_events() const
+{
+	vector<SDL_Event> events;
+	SDL_Event e;
+	
+	while( SDL_PollEvent( &e ) != 0 )
+		events.push_back(e);
+	return events;
+}
+
+vector<SDL_Event> Game::process_event(vector<SDL_Event>& events)
+{
+	vector<SDL_Event> np;
+	
+	for(auto e : events)
+	{
+		if(e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE))
+			quit = true;
+		else
+			np.push_back(e);
+	}
+	
+	return np;
+}
