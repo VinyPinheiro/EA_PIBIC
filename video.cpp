@@ -4,7 +4,7 @@
 Video::Video(int w, int h)
 {
 	SDL_CreateWindowAndRenderer(w, h, 0, &janela, &renderer);
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 }
 
 Video::~Video()

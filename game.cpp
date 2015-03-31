@@ -32,9 +32,9 @@ Game::~Game()
 int Game::run()
 {
 	vector<SDL_Event> events;
-	UnB unb(video);
     Uint32 now = SDL_GetTicks(), start = SDL_GetTicks();
-    Fomento fomento(video, start, 3000);
+    Fomento fomento(video, start + 3000, 3000);
+	UnB unb(video,start, 3000);
 	
 	//Imagem *terra = new Imagem(video, "imgs/terra.png");
 
@@ -47,7 +47,7 @@ int Game::run()
 		
 	
 		video->erase();
-        unb.draw(0, 0);
+        unb.draw(223, 100, 136,300, now);
         
         fomento.draw(38,175,now);
 		//terra->draw(0,0,0,0,761,565,800,600);

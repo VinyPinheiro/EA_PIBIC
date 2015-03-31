@@ -18,7 +18,7 @@ public:
 private:
 	Imagem *fomento;
 	Video *video;
-	Uint32 end;
+	Uint32 end,start;
 };
 
 #endif
