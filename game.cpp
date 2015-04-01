@@ -5,6 +5,7 @@
 #include "unb.h"
 #include "fomento.h"
 #include "technologies.h"
+#include "indicative_classification.h"
 
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -35,6 +36,7 @@ int Game::run()
 	vector<SDL_Event> events;
     Uint32 now = SDL_GetTicks(), start = SDL_GetTicks();
     
+    Indicative_classification classification(video, start + 9000, 3000);
 	Technologies technologies(video,start + 6000, 3000);
     Fomento fomento(video, start + 3000, 3000);
 	UnB unb(video,start, 3000);
@@ -48,11 +50,14 @@ int Game::run()
 		
 	
 		video->erase();
+        
         unb.draw(223, 100, 136,300, now);
         
         fomento.draw(38,175,now);
         
         technologies.draw(310, 50, 220,200, 316, 400, now);
+        
+        classification.draw(0,400,now);
         
 		video->update();
 	}
