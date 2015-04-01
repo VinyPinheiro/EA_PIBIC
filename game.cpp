@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "unb.h"
 #include "fomento.h"
+#include "technologies.h"
 
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -33,10 +34,10 @@ int Game::run()
 {
 	vector<SDL_Event> events;
     Uint32 now = SDL_GetTicks(), start = SDL_GetTicks();
+    
+	Technologies technologies(video,start + 6000, 3000);
     Fomento fomento(video, start + 3000, 3000);
 	UnB unb(video,start, 3000);
-	
-	//Imagem *terra = new Imagem(video, "imgs/terra.png");
 
 	while(!quit)
 	{
@@ -50,11 +51,9 @@ int Game::run()
         unb.draw(223, 100, 136,300, now);
         
         fomento.draw(38,175,now);
-		//terra->draw(0,0,0,0,761,565,800,600);
-		/*if(now >= start + 33*2*20 || !earth->getState())
-		{
-			menu->draw();
-		}*/
+        
+        technologies.draw(310, 100, 220,300, now);
+        
 		video->update();
 	}
 	
