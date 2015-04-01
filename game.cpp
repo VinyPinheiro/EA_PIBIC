@@ -52,7 +52,7 @@ int Game::run()
         
         fomento.draw(38,175,now);
         
-        technologies.draw(310, 100, 220,300, now);
+        technologies.draw(310, 50, 220,200, 316, 400, now);
         
 		video->update();
 	}

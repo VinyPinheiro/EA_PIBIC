@@ -13,11 +13,12 @@ public:
 	
 	bool process_event(vector<SDL_Event>& events);
 	void draw(int x, int y);
-	void draw(int x1, int y1, int x2, int y2, Uint32 now);
+	void draw(int x1, int y1, int x2, int y2, int x3, int y3, Uint32 now);
 
 private:
-	Imagem *unb;
-	Imagem *fga;
+	Imagem *sdl;
+	Imagem *cpp;
+	Imagem *inkscape;
 	Video *video;
 	Uint32 end,start;
 };
