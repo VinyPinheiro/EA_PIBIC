@@ -1,25 +1,22 @@
 #ifndef UNB_H
 #define UNB_H
 
-#include "video.h"
-#include "level.h"
+#include "frontend.h"
 #include "imagem.h"
 
-class UnB : public Level
+class UnB : public FrontEnd
 {
 public:
-	UnB(Video *video, Uint32 begin, Uint32 finish);
+	UnB(Video *video, Level *next = 0, Uint32 duration = 3000);
 	~UnB();
 	
-	bool process_event(vector<SDL_Event>& events);
-	void draw(int x, int y);
-	void draw(int x1, int y1, int x2, int y2, Uint32 now);
+	void draw(int x = 0, int y = 0);
 
 private:
 	Imagem *unb;
 	Imagem *fga;
-	Video *video;
-	Uint32 end;
+
+	void draw(int x1, int y1, int x2, int y2);
 };
 
 #endif

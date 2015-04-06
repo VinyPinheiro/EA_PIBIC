@@ -1,35 +1,28 @@
 #include "unb.h"
 
-UnB::UnB(Video *v, Uint32 begin, Uint32 finish)
+UnB::UnB(Video *v, Level *n, Uint32 d)
+    : FrontEnd(v, n, d)
 {
-	video = v;
 	unb = new Imagem(video, "imgs/UNB.png");
 	fga = new Imagem(video, "imgs/FGA.jpg");
-	end = finish + begin;
 }
 
 UnB::~UnB()
 {
-	delete unb;
 	delete fga;
+	delete unb;
 }
 	
-bool 
-UnB::process_event(vector<SDL_Event>& events)
+void 
+UnB::draw(int x1, int y1,int x2, int y2)
 {
-	return true;
+    unb->draw(x1, y1);
+    fga->draw(x2, y2);
 }
 
 void 
-UnB::draw(int x1, int y1,int x2, int y2, Uint32 now)
+UnB::draw(int, int)
 {
-	if (now < end)
-	{
-		unb->draw(x1, y1);
-		fga->draw(x2, y2);
-	}
+    draw(223, 100, 136, 300);
 }
-void 
-UnB::draw(int x, int y)
-{
-}
+

@@ -2,23 +2,19 @@
 #define FOMENTO_H
 
 #include "video.h"
-#include "level.h"
+#include "frontend.h"
 #include "imagem.h"
 
-class Fomento : public Level
+class Fomento : public FrontEnd
 {
 public:
-	Fomento(Video *video, Uint32 begin, Uint32 finish);
+    Fomento(Video *v, Level *n = 0, Uint32 d = 3000);
 	~Fomento();
 	
-	bool process_event(vector<SDL_Event>& events);
-	void draw(int x, int y);
-	void draw(int x, int y, Uint32 now);
+	void draw(int x = 0, int y = 0);
 
 private:
 	Imagem *fomento;
-	Video *video;
-	Uint32 end,start;
 };
 
 #endif

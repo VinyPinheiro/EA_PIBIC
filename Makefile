@@ -17,3 +17,5 @@ game: $(OBJ)
 clean:
 	@rm -rf *.o
 
+dist-clean: clean
+	@rm -rf game
