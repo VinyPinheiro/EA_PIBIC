@@ -11,9 +11,18 @@ FrontEnd::FrontEnd(Video *v, Level *n, Uint32 d)
 }
 
 bool 
-FrontEnd::process_event(vector<SDL_Event>&)
+FrontEnd::process_event(vector<SDL_Event>& events)
 {
-	return true;
+    for (auto event : events)
+    {
+        if (event.type == SDL_KEYDOWN or event.type == SDL_MOUSEBUTTONDOWN)
+        {
+            done_level = true;
+            return true;
+        }
+    }
+
+	return false;
 }
 
 void 
