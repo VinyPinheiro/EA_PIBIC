@@ -20,8 +20,6 @@ protected:
     Level *next_level;
 	Uint32 duration, start;
     bool done_level;
-
-
 };
 
 #endif

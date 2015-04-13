@@ -39,8 +39,8 @@ int Game::run()
     Uint32 now = SDL_GetTicks();
     
 //    Indicative_classification classification(video, start + 9000, 3000);
-//	Technologies technologies(video,start + 6000, 3000);
-    Fomento *fomento = new Fomento(video);
+	Technologies *technologies = new Technologies(video);
+    Fomento *fomento = new Fomento(video, technologies);
 	UnB *unb = new UnB(video, fomento);
     Level *level = unb;
 
@@ -56,8 +56,6 @@ int Game::run()
 		video->erase();
         level->draw();
 		video->update();
-        
-    //    technologies.draw(310, 50, 220,200, 316, 400, now);
         
      //   classification.draw(0,400,now);
         
