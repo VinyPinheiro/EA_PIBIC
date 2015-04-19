@@ -12,7 +12,7 @@ Fomento::~Fomento()
 }
 	
 void 
-Fomento::draw(int x, int y)
+Fomento::draw(int, int)
 {
     fomento->draw(38, 175);
 }

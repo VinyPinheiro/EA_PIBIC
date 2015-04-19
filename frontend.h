@@ -11,9 +11,11 @@ public:
 
 	virtual bool process_event(vector<SDL_Event>& events);
     virtual void update(Uint32 now);
+    virtual void setDone(bool done);
+    virtual void setNext(Level * n);
 
-    virtual bool done() const;
-    virtual Level * next() const;
+    virtual bool getDone() const;
+    virtual Level * getNext() const;
 
 protected:
 	Video *video;

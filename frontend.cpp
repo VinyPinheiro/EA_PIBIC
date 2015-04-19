@@ -36,13 +36,25 @@ FrontEnd::update(Uint32 now)
 }
 
 bool 
-FrontEnd::done() const
+FrontEnd::getDone() const
 {
     return done_level;
 }
 
+void
+FrontEnd::setDone(bool done)
+{
+    done_level = done;
+}
+
 Level * 
-FrontEnd::next() const
+FrontEnd::getNext() const
 {
     return next_level;
+}
+
+void
+FrontEnd::setNext(Level * n)
+{
+	next_level = n;
 }

@@ -1,5 +1,5 @@
 #include "entenda.h"
-
+/*
 Entenda::Entenda(Video *video)
 {
 	
@@ -23,3 +23,4 @@ Entenda::draw()
 }
 
 
+*/
