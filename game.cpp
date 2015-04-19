@@ -38,8 +38,8 @@ int Game::run()
 	vector<SDL_Event> events;
     Uint32 now = SDL_GetTicks();
     
-//    Indicative_classification classification(video, start + 9000, 3000);
-	Technologies *technologies = new Technologies(video);
+    Indicative_classification *classification = new Indicative_classification(video);
+	Technologies *technologies = new Technologies(video,classification);
     Fomento *fomento = new Fomento(video, technologies);
 	UnB *unb = new UnB(video, fomento);
     Level *level = unb;
