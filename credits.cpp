@@ -16,8 +16,3 @@ Credits::draw(int x, int y)
 {
 	credits->draw(x, y);
 }
-void
-Credits::draw(int, int)
-{
-    draw(0, 0);
-}
