@@ -15,10 +15,9 @@ public:
 
 private:
 	Imagem *sdl;
-	Imagem *cpp;
 	Imagem *inkscape;
 
-    void draw(int x1, int y1,int x2, int y2,int x3, int y3);
+    void draw(int x1, int y1,int x2, int y2);
 };
 
 #endif
