@@ -1,25 +1,28 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <SDL2/SDL.h>
-#include "video.h"
 #include "imagem.h"
-#include "entenda.h"
+#include "video.h"
+#include "frontend.h"
 
-class Menu
+class Menu : public FrontEnd
 {
-public:
-	Menu(Video *video);
+public:	
+    Menu(Video *video, Level *next = 0, Uint32 duration = 3000);
 	~Menu();
+	void update(Uint32);
 	
-	void draw();	
-    bool onMouseButtonEvent(SDL_MouseButtonEvent event);
+	void draw(int x = 0, int y = 0);
+
 private:
 	Imagem *menu;
-	Imagem *opcao1;
-	Imagem *opcao2;
-	Imagem *opcao3;
-	Entenda *entenda;
+	Imagem *litio;
+	Imagem *macauba;
+	Imagem *entenda;
+	Imagem *back;
+	Imagem *earth;
+	
+	bool process_event(vector<SDL_Event>& events);
 };
 
 #endif

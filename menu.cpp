@@ -1,51 +1,73 @@
 #include "menu.h"
+#include "presentation.h"
 
-Menu::Menu(Video *video)
+Menu::Menu(Video *v, Level *n, Uint32 d)
+    : FrontEnd(v, n, d)
 {
+	earth = new Imagem(video, "imgs/terra.png");
+	back = new Imagem(video,"imgs/seta.png");
 	menu = new Imagem(video, "imgs/menu.png");
-	opcao1 = new Imagem(video, "imgs/menu.png");
-	opcao2 = new Imagem(video, "imgs/menu.png");
-	opcao3 = new Imagem(video, "imgs/menu.png");
-	//entenda = new Entenda(video);
+	litio = new Imagem(video, "imgs/menu.png");
+	macauba = new Imagem(video, "imgs/menu.png");
+	entenda = new Imagem(video, "imgs/menu.png");
 }
 
 Menu::~Menu()
 {
+	delete entenda;
+	delete macauba;
+	delete litio;
 	delete menu;
-	delete opcao1;
-	delete opcao2;
-	delete opcao3;
+	delete back;
+	delete earth;
 }
 
 void
-Menu::draw()
+Menu::draw(int,int)
 {
+	earth->draw(0,0,0,0,761,565,800,600);
+	back->draw(15,15);
 	menu->draw(250,100,0,0, 300,110);
-	opcao1->draw(250,227,0,110,310,80);
-	opcao2->draw(250,307,0,190,310,70);
-	opcao3->draw(250,377,0,260,310,70);
+	litio->draw(250,227,0,110,310,80);
+	macauba->draw(250,307,0,190,310,70);
+	entenda->draw(250,377,0,260,310,70);
 
 }
 
-bool
-Menu::onMouseButtonEvent(SDL_MouseButtonEvent event)
+
+void
+Menu::update(Uint32){}
+
+bool 
+Menu::process_event(vector<SDL_Event>& events)
 {
-	/*if(event.x >= 250 && event.x < 560 &&
-		event.y >= 227 && event.y < 307)
-	{
-		cerr << "litio"<<endl;
-	}
-	else if(event.x >= 250 && event.x < 560 &&
-		event.y >= 307 && event.y < 377)
-	{
-		cerr << "Macauba"<<endl;
-	}
-	else if(event.x >= 250 && event.x < 560 &&
-		event.y >= 377 && event.y < 447)
-	{
-		cerr << "Entenda" << endl;
-		entenda->draw();
-	}
-	* */
-	return true;
+    for (auto event : events)
+    {
+		if (event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			if(event.button.x >= 15 && event.button.x < 65 &&
+				event.button.y >= 15 && event.button.y < 87)
+			{
+				setNext(new Presentation(video));
+				setDone(true);
+			}
+			else if(event.button.x >= 250 && event.button.x < 560 &&
+				event.button.y >= 227 && event.button.y < 307)
+			{
+				cerr << "litio"<<endl;
+			}
+			else if(event.button.x >= 250 && event.button.x < 560 &&
+				event.button.y >= 307 && event.button.y < 377)
+			{
+				cerr << "Macauba"<<endl;
+			}
+			else if(event.button.x >= 250 && event.button.x < 560 &&
+				event.button.y >= 377 && event.button.y < 447)
+			{
+				cerr << "Entenda" << endl;
+			}
+		}
+    }
+
+	return false;
 }

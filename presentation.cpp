@@ -1,5 +1,6 @@
 #include "presentation.h"
 #include "credits.h"
+#include "menu.h"
 
 Presentation::Presentation(Video *v, Level *n, Uint32 d)
     : FrontEnd(v, n, d)
@@ -20,6 +21,9 @@ Presentation::~Presentation()
 	delete earth;
 }
 
+void
+Presentation::update(Uint32){}
+
 void 
 Presentation::draw(int, int)
 {
@@ -30,28 +34,29 @@ Presentation::draw(int, int)
 	exit->draw(250,377,0,260,310,70);
 }
 
-void 
-Presentation::update(Uint32)
-{}
-
 bool 
 Presentation::process_event(vector<SDL_Event>& events)
 {
     for (auto event : events)
     {
-        if (event.type == SDL_MOUSEBUTTONDOWN)
-        {
+		if (event.type == SDL_MOUSEBUTTONDOWN)
+		{
 			if(event.button.x >= 250 && event.button.x < 560 &&
+				event.button.y >= 227 && event.button.y < 307)
+			{
+				setNext(new Menu(video));
+				setDone(true);
+			}
+			else if(event.button.x >= 250 && event.button.x < 560 &&
 				event.button.y >= 307 && event.button.y < 377)
 			{
-				Credits *credits = new Credits(video,new Presentation(video),3000);
-				setNext(credits);
+				setNext(new Credits(video,new Presentation(video),5000));
 				setDone(true);
 			}
 			else if(event.button.x >= 250 && event.button.x < 560 &&
 				event.button.y >= 377 && event.button.y < 447)
 			{
-				setNext(NULL);
+				setNext(nullptr);
 				setDone(true);
 			}
             return true;

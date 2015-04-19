@@ -22,7 +22,6 @@ private:
 	Imagem *earth;
 	
 	bool process_event(vector<SDL_Event>& events);
-    void draw(int x1, int y1,int x2, int y2);
 };
 
 #endif
