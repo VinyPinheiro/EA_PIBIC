@@ -27,7 +27,7 @@ Animation::draw(Uint32 now, const int frames, const int rows, const int w, const
 {
 	if(!state)
 		return;
-    const Uint32 speed = 33*2;
+    const Uint32 speed = 33*2*2;
 
     Uint32 elapsed = now - begin;
 
@@ -51,46 +51,11 @@ Animation::draw(Uint32 now, const int frames, const int rows, const int w, const
     img->draw(posx, posy, x, y, w, h);
 }
 
-bool 
-Animation::onKeyboardEvent(SDL_KeyboardEvent event)
+void
+Animation::setPos(int x, int y)
 {
-    int speed = 5;
-
-    switch (event.keysym.sym) {
-    case SDLK_UP:
-        posy -= speed;
-        return true;
-    case SDLK_DOWN:
-        posy += speed;
-        return true;
-    case SDLK_LEFT:
-        posx -= speed;
-        return true;
-    case SDLK_RIGHT:
-        posx += speed;
-        return true;
-    case SDLK_ESCAPE:
-        state = false;;
-        return true;
-    }
-
-    return false;
-}
-
-bool 
-Animation::onMouseButtonEvent(SDL_MouseButtonEvent event)
-{
-    if (event.button ==  SDL_BUTTON_RIGHT)
-    {
-        paused = true;
-        return true;
-    } else if (event.button == SDL_BUTTON_LEFT)
-    {
-        paused = false;
-        return true;
-    }
-
-    return false;
+	posx = x;
+	posy = y;
 }
 
 bool

@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "presentation.h"
+#include "entenda.h"
 
 Menu::Menu(Video *v, Level *n, Uint32 d)
     : FrontEnd(v, n, d)
@@ -64,7 +65,8 @@ Menu::process_event(vector<SDL_Event>& events)
 			else if(event.button.x >= 250 && event.button.x < 560 &&
 				event.button.y >= 377 && event.button.y < 447)
 			{
-				cerr << "Entenda" << endl;
+				setNext(new Entenda(video));
+				setDone(true);
 			}
 		}
     }

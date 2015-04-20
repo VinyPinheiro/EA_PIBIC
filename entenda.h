@@ -1,20 +1,30 @@
 #ifndef ENTENDA_H
 #define ENTENDA_H
 
-#include <SDL2/SDL.h>
-#include "video.h"
 #include "imagem.h"
+#include "animation.h"
+#include "video.h"
+#include "frontend.h"
 
-class Entenda
+class Entenda : public FrontEnd
 {
 public:
-	Entenda(Video *video);
+	Entenda(Video *video, Level *next = 0, Uint32 duration = 3000);
 	~Entenda();
-	bool Altera_imagem(string caminho, Imagem img,int x, int y, int x_orig, int y_orig, int w_orig, int h_orig);
+	void update(Uint32);
+	bool process_event(vector<SDL_Event>&);
 	
-	void draw();	
+	void draw(int x = 0, int y = 0);
+	
 private:
-	Imagem *fundo;
+	Uint32 init;
+	Imagem *balao;
+	Imagem *aux;
+	
+	Animation *cenario;
+	Animation *caminhao;
+	Animation *mina;
 };
+
 
 #endif
