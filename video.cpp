@@ -2,6 +2,7 @@
 
 
 Video::Video(int w, int h)
+    : m_w(w), m_h(h)
 {
 	SDL_CreateWindowAndRenderer(w, h, 0, &janela, &renderer);
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -27,3 +28,16 @@ void Video::erase()
 {
 	SDL_RenderClear(renderer);
 }
+
+int
+Video::w() const
+{
+    return m_w;
+}
+
+int
+Video::h() const
+{
+    return m_h;
+}
+

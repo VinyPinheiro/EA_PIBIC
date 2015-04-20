@@ -13,7 +13,11 @@ public:
 	void update();
 	void erase();
 
+    int w() const;
+    int h() const;
+
 private:
+    int m_w, m_h;
 	SDL_Window* janela;
 	SDL_Renderer *renderer;
 };

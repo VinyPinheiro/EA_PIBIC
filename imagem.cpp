@@ -18,6 +18,14 @@ Imagem::Imagem(Video* video, const string& path)
 	SDL_FreeSurface(img);
 }
 
+Imagem::Imagem(Video* video, SDL_Texture *texture, int w, int h)
+{
+    textura = texture;
+    this->w = w;
+    this->h = h;
+    this->video = video;
+}
+
 Imagem::~Imagem()
 {
 	SDL_DestroyTexture(textura);

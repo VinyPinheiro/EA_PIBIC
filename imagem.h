@@ -11,6 +11,7 @@ class Imagem
 {
 public:
 	Imagem(Video* video, const string& path);
+	Imagem(Video* video, SDL_Texture *texture, int w, int h);
 	~Imagem();
 	
 	void draw(int x, int y);

@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 using namespace std;
 
@@ -25,12 +26,23 @@ Game::Game()
 		return;
 	}
 
+    rc = TTF_Init();
+
+    if (rc != 0)
+    {
+        cerr << "Nao foi possivel inicializar a SDL_ttf: " << TTF_GetError()
+            << endl;
+
+        return;
+    }
+
 	video = new Video();
 }
 
 Game::~Game()
 {
 	delete video;
+    TTF_Quit();
 	SDL_Quit();
 }
 

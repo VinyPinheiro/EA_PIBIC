@@ -14,7 +14,9 @@ public:
 	void draw(int x = 0, int y = 0);
 
 private:
-	Imagem *credits;
+    Imagem *m_alunos;
+    Imagem *m_vinicius;
+//	Imagem *credits;
 };
 
 #endif
