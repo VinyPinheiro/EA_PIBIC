@@ -5,43 +5,67 @@
 Credits::Credits(Video *v, Level *n, Uint32 d)
     : FrontEnd(v, n, d)
 {
-    TTF_Font *m_font = TTF_OpenFont("AjarSans-Regular.ttf", 60);
-    TTF_SetFontStyle(m_font, TTF_STYLE_BOLD);
-
-    TTF_Font *m_font2 = TTF_OpenFont("AjarSans-Regular.ttf", 30);
-
-    SDL_Color m_color;
-    m_color.r = m_color.g = m_color.b = 0;
-    m_color.a = 255;
-
-    SDL_Surface *s = TTF_RenderText_Blended(m_font, "ALUNOS", m_color);
-    SDL_Texture *textura = SDL_CreateTextureFromSurface(v->getRenderer(), s);
-    m_alunos = new Imagem(v, textura, s->w, s->h);
-    SDL_FreeSurface(s);
-
-    s = TTF_RenderText_Blended(m_font2, "Vinicius Pinheiro da Silva Correa", m_color);
-    textura = SDL_CreateTextureFromSurface(v->getRenderer(), s);
-    m_vinicius = new Imagem(v, textura, s->w, s->h);
-    SDL_FreeSurface(s);
-
-
-    TTF_CloseFont(m_font);
-    TTF_CloseFont(m_font2);
-//	credits = new Imagem(video, "imgs/creditos.png");
+	const string font = "fontes/AjarSans-Regular.ttf";
+	const int tam_integrantes = 45;
+    
+    alunos = new Text(v,font,60,"ALUNOS");
+    alunos->setStyleItalic();
+    alunos->setStyleBold();
+    
+    camila = new Text(v,font,tam_integrantes,"Camila Carneiro Ferrer");
+    gesiel = new Text(v,font,tam_integrantes,"Gesiel dos Santos Freitas");
+    vinicius = new Text(v,font,tam_integrantes,"Vinicius Pinheiro da Silva Correa");
+    
+    orientadores = new Text(v,font,60,"ORIENTADORES");
+    orientadores->setStyleItalic();
+    orientadores->setStyleBold();
+    
+    edson = new Text(v,font,tam_integrantes,"Edson Alves da Costa Junior");
+    vitoria = new Text(v,font,tam_integrantes,"Maria Vitoria Duarte Ferrari Tome",255);
 }
 
 Credits::~Credits()
 {
-    delete m_vinicius;
-    delete m_alunos;
+	delete vitoria;
+	delete edson;
+	delete orientadores;
+	delete vinicius;
+	delete gesiel;
+	delete camila;
+    delete alunos;
 }
 
 void
-Credits::draw(int x, int y)
+Credits::draw(int, int)
 {
-    int xa = video->w()/2 - m_alunos->getW()/2;
-    m_alunos->draw(xa, 25);
+	int xa = video->w()/2 - alunos->getW()/2;
+	int xb = 15;
+	
+	alunos->draw(xa, xb);
+	xb+=alunos->getH();
+	
+	xa = video->w()/2 - camila->getW()/2;
+	camila->draw(xa, xb);
+	xb+=camila->getH();
+	
+	xa = video->w()/2 - gesiel->getW()/2;
+	gesiel->draw(xa, xb);
+	xb+=gesiel->getH();
+	
+	xa = video->w()/2 - vinicius->getW()/2;
+	vinicius->draw(xa, xb);
+	xb+=vinicius->getH();
+	
+	xa = video->w()/2 - orientadores->getW()/2;
+	xb+=15;	
+	orientadores->draw(xa, xb);
+	xb+=orientadores->getH();
+	
+	xa = video->w()/2 - edson->getW()/2;
+	edson->draw(xa, xb);
+	xb+=edson->getH();
+	
+	xa = video->w()/2 - vitoria->getW()/2;
+	vitoria->draw(xa, xb);
 
-    xa = video->w()/2 - m_vinicius->getW()/2;
-    m_vinicius->draw(xa, 120);
 }

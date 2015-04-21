@@ -1,5 +1,4 @@
 #include "animation.h"
-#include <string>
 
 Animation::Animation(Video *video,const string caminho)
 {

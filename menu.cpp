@@ -6,7 +6,7 @@ Menu::Menu(Video *v, Level *n, Uint32 d)
     : FrontEnd(v, n, d)
 {
 	earth = new Imagem(video, "imgs/terra.png");
-	back = new Imagem(video,"imgs/seta.png");
+	back = new Imagem(video,"imgs/setaE.png");
 	menu = new Imagem(video, "imgs/menu.png");
 	litio = new Imagem(video, "imgs/menu.png");
 	macauba = new Imagem(video, "imgs/menu.png");

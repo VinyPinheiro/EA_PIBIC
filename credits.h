@@ -4,6 +4,7 @@
 #include "imagem.h"
 #include "video.h"
 #include "frontend.h"
+#include "text.h"
 
 class Credits : public FrontEnd
 {
@@ -14,9 +15,13 @@ public:
 	void draw(int x = 0, int y = 0);
 
 private:
-    Imagem *m_alunos;
-    Imagem *m_vinicius;
-//	Imagem *credits;
+	Text *alunos;
+	Text *vinicius;
+	Text *camila;
+	Text *gesiel;
+	Text *orientadores;
+	Text *edson;
+	Text *vitoria;
 };
 
 #endif
