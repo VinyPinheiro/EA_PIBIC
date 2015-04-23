@@ -12,7 +12,8 @@ public:
 	SDL_Renderer* getRenderer() const;
 	void update();
 	void erase();
-
+	void setColor(int r=255, int g=255, int b=255, int a = 255);
+    
     int w() const;
     int h() const;
 

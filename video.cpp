@@ -1,4 +1,5 @@
 #include "video.h"
+#include "rect.h"
 
 
 Video::Video(int w, int h)
@@ -39,5 +40,12 @@ int
 Video::h() const
 {
     return m_h;
+}
+
+void 
+Video::setColor(int r, int g, int b, int a)
+{ 
+	SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
 

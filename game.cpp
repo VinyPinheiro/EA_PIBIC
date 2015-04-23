@@ -66,7 +66,8 @@ int Game::run()
 	    level->process_event(events);
 
         level->update(now);
-
+		
+		video->setColor(); // garantir o fundo branco
 		video->erase();
         level->draw();
 		video->update();

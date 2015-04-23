@@ -15,12 +15,12 @@ Text::Text(Video *video, const string& path, int size, const string& text,int r,
     color.a = a;
     
     //Create Surface
-    SDL_Surface *s = TTF_RenderText_Blended(font, text.c_str(), color);
+    SDL_Surface *s = TTF_RenderUTF8_Blended(font, text.c_str(), color);
     SDL_Texture *textura = SDL_CreateTextureFromSurface(video->getRenderer(), s);
     img = new Imagem(video, textura, s->w, s->h);
     SDL_FreeSurface(s);
     
-    //Close fonte
+    //Close font
     TTF_CloseFont(font);
 }
 

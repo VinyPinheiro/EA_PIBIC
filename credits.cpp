@@ -7,21 +7,21 @@ Credits::Credits(Video *v, Level *n, Uint32 d)
 {
 	const string font = "fontes/AjarSans-Regular.ttf";
 	const int tam_integrantes = 45;
-    
+        
     alunos = new Text(v,font,60,"ALUNOS");
     alunos->setStyleItalic();
     alunos->setStyleBold();
     
     camila = new Text(v,font,tam_integrantes,"Camila Carneiro Ferrer");
     gesiel = new Text(v,font,tam_integrantes,"Gesiel dos Santos Freitas");
-    vinicius = new Text(v,font,tam_integrantes,"Vinicius Pinheiro da Silva Correa");
+    vinicius = new Text(v,font,tam_integrantes,"Vinícius Pinheiro da Silva Corrêa");
     
     orientadores = new Text(v,font,60,"ORIENTADORES");
     orientadores->setStyleItalic();
     orientadores->setStyleBold();
     
     edson = new Text(v,font,tam_integrantes,"Edson Alves da Costa Junior");
-    vitoria = new Text(v,font,tam_integrantes,"Maria Vitoria Duarte Ferrari Tome",255);
+    vitoria = new Text(v,font,tam_integrantes,"Maria Vitória Duarte Ferrari Tome");
 }
 
 Credits::~Credits()
