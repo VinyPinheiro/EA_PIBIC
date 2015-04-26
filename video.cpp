@@ -1,6 +1,4 @@
 #include "video.h"
-#include "rect.h"
-
 
 Video::Video(int w, int h)
     : m_w(w), m_h(h)

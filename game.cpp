@@ -56,7 +56,7 @@ int Game::run()
 	Technologies *technologies = new Technologies(video,classification);
     Fomento *fomento = new Fomento(video, technologies);
 	UnB *unb = new UnB(video, fomento);
-    Level *level = presentation;
+    Level *level = unb;
 
 	while(level and !quit)
 	{

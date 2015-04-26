@@ -3,6 +3,7 @@
 
 #include "imagem.h"
 #include "video.h"
+#include "text.h"
 #include "frontend.h"
 
 class Menu : public FrontEnd
@@ -15,10 +16,10 @@ public:
 	void draw(int x = 0, int y = 0);
 
 private:
-	Imagem *menu;
-	Imagem *litio;
-	Imagem *macauba;
-	Imagem *entenda;
+	Text *menu;
+	Text *litio;
+	Text *macauba;
+	Text *entenda;
 	Imagem *back;
 	Imagem *earth;
 	
