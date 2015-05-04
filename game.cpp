@@ -7,6 +7,7 @@
 #include "technologies.h"
 #include "indicative_classification.h"
 #include "presentation.h"
+#include "simulation.h"
 
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -36,7 +37,7 @@ Game::Game()
         return;
     }
 
-	video = new Video();
+	video = new Video(1200, 800);
 }
 
 Game::~Game()
@@ -51,12 +52,14 @@ int Game::run()
 	vector<SDL_Event> events;
     Uint32 now = SDL_GetTicks();
     
+    Simulation *simulation = new Simulation(video); 
+
     Presentation *presentation = new Presentation(video);
     Indicative_classification *classification = new Indicative_classification(video,presentation);
 	Technologies *technologies = new Technologies(video,classification);
     Fomento *fomento = new Fomento(video, technologies);
 	UnB *unb = new UnB(video, fomento);
-    Level *level = unb;
+    Level *level = simulation;
 
 	while(level and !quit)
 	{
@@ -70,10 +73,8 @@ int Game::run()
 		video->setColor(); // garantir o fundo branco
 		video->erase();
         level->draw();
-		video->update();
+	    video->update();
         
-        
-
         if (level->getDone())
         {
             Level *next = level->getNext();
