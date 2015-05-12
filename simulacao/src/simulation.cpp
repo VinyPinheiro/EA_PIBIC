@@ -6,30 +6,33 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "simulation.h"
-//#include "frontend.h"
+
+#include <util/frontend.h>
 //#include "titlescreen.h"
 //#include "stage.h"
 
 Simulation::Simulation()
-    : Game("a")
+    : Game("unb")
 {
 }
 
 Level *
 Simulation::load_level(const string& id)
 {
-/*    if (id == "a")
+    if (id == "unb")
     {
-        return new FrontEnd("b", "res/images/hexagon.png");
+        return new FrontEnd("cnpq", "res/images/unb.png", 3000, Color::WHITE);
     }
-    else if (id == "b")
+    else if (id == "cnpq")
     {
-        return new FrontEnd("c", "res/images/star.png");
+        return new FrontEnd("classification", "res/images/cnpq_capes.jpg",
+            3000, Color::WHITE);
     }
-    else if (id == "c")
+    else if (id == "classification")
     {
-        return new FrontEnd("title", "res/images/spiral.png");
-    } else if (id == "title")
+        return new FrontEnd("", "res/images/classification.png");
+    }
+/*    else if (id == "title")
     {
         return new TitleScreen();
     } else if (id == "stage1")
