@@ -6,7 +6,7 @@ SRC = ${wildcard *.cpp}
 OBJ = ${SRC:.cpp=.o}
 
 all:
-	@make game
+	$(MAKE) game
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $<

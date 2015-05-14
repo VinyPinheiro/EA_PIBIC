@@ -5,15 +5,13 @@ INC_DIR = include
 OBJ_DIR = obj
 BIN_DIR = bin
 
-ENGINE_DIR = /usr/share/ijengine
-
 TARGET = $(BIN_DIR)/$(NAME)
 
 CC = g++
 
 CFLAGS = -W -Wall -pedantic -std=c++11 -MMD -g3
-INCLUDES = -Iinclude -I$(ENGINE_DIR)/include -Itest `sdl2-config --cflags`
-LIBS = -L$(ENGINE_DIR)/lib -lijengine `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
+INCLUDES = -Iinclude -I/usr/local/include/ijengine -Itest `sdl2-config --cflags`
+LIBS = -lijengine `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
 
 SRC = ${wildcard $(SRC_DIR)/*.cpp}
 OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}

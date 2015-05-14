@@ -2,14 +2,13 @@
  * Implementação da classe Simulation.
  *
  * Autor: Edson Alves
- * Data: 20/04/2015
+ * Data: 11/05/2015
  * Licença: LGPL. Sem copyright.
  */
 #include "simulation.h"
+#include "titlescreen.h"
 
-#include <util/frontend.h>
-//#include "titlescreen.h"
-//#include "stage.h"
+#include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
     : Game("unb")
@@ -30,15 +29,12 @@ Simulation::load_level(const string& id)
     }
     else if (id == "classification")
     {
-        return new FrontEnd("", "res/images/classification.png");
+        return new FrontEnd("title", "res/images/classification.png");
     }
-/*    else if (id == "title")
+    else if (id == "title")
     {
         return new TitleScreen();
-    } else if (id == "stage1")
-    {
-        return new Stage("stage1");
     }
-*/
+
     return nullptr;
 }

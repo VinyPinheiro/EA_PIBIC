@@ -8,7 +8,7 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-#include <game.h>
+#include <ijengine/core/game.h>
 
 class Simulation : public Game
 {
