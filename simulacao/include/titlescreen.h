@@ -14,7 +14,7 @@ class TitleScreen : public Level
 {
 public:
     TitleScreen();
-    virtual ~TitleScreen();
+    virtual ~TitleScreen() {}
 
     bool on_message(Object *sender, MessageID id, Parameters parameters);
 

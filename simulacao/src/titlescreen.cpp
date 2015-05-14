@@ -9,6 +9,9 @@
 
 #include <ijengine/core/environment.h>
 #include <ijengine/core/image.h>
+#include <ijengine/core/text.h>
+#include <ijengine/core/font.h>
+#include <ijengine/util/button.h>
 
 #include <cstdio>
 using namespace std;
@@ -21,39 +24,72 @@ TitleScreen::TitleScreen()
 
     Image *image = new Image(this, "res/images/earth.png");
 
-printf("Image antes = (%.1f, %.1f), %.1fx%.1f\n", image->x(), image->y(), image->w(), image->h());
-
     if (image)
     {
         image->align_to(this, Object::CENTER, Object::MIDDLE);
-printf("Image depois = (%.1f, %.1f), %.1fx%.1f\n", image->x(), image->y(), image->w(), image->h());
     }
 
     add_child(image);
 
-/*    double w = env->canvas->w();
-    double h = env->canvas->h();
+    shared_ptr<Font> font =
+        env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
+    font->set_size(90);
 
-    double bw = 100;
-    double bh = 50;
+    env->canvas->set_font(font);
 
-    double bx = (w - bw)/2;
-    double by = h/2;
+    Text *title = new Text(this, "Simulação Ambiental", Color::WHITE);
 
-    Button *ok = new Button(this, "ok", bx, by, bw, bh);
-    Button *exit = new Button(this, "exit", bx, by + bh + 20, bw, bh,
-        Color::RED);
+    if (title)
+    {
+        title->align_to(this, Object::CENTER, Object::NONE);
+        title->set_y(80);
+    }
 
-    ok->add_observer(this);
-    exit->add_observer(this);
+    add_child(title);
 
-    add_child(ok);
-    add_child(exit);
-*/
-}
+    font->set_size(45);
 
-TitleScreen::~TitleScreen()
-{
+    Button *start = new Button(this, "start", 200, 100);
+
+    if (start)
+    {
+        start->set_text("Iniciar", Color::WHITE);
+        start->set_color(Color(0, 0, 0, 128), Color(64, 64, 64, 128));
+        start->set_border(1, Color(128, 128, 128, 128));
+        start->align_to(this, Object::CENTER, Object::NONE);
+        start->set_y(260);
+        start->add_observer(this);
+    }
+
+    add_child(start);
+
+    Button *credits = new Button(this, "credits", 200, 100);
+
+    if (credits)
+    {
+        credits->set_text("Créditos", Color::WHITE);
+        credits->set_color(Color(0, 0, 0, 128), Color(64, 64, 64, 128));
+        credits->set_border(1, Color(128, 128, 128, 128));
+        credits->align_to(this, Object::CENTER, Object::NONE);
+        credits->set_y(380);
+        credits->add_observer(this);
+    }
+
+    add_child(credits);
+
+    Button *quit = new Button(this, "quit", 200, 100);
+
+    if (quit)
+    {
+        quit->set_text("Sair", Color::WHITE);
+        quit->set_color(Color(0, 0, 0, 128), Color(64, 64, 64, 128));
+        quit->set_border(1, Color(128, 128, 128, 128));
+        quit->align_to(this, Object::CENTER, Object::NONE);
+        quit->set_y(500);
+        quit->add_observer(this);
+    }
+
+    add_child(quit);
 }
 
 void
@@ -66,7 +102,7 @@ TitleScreen::draw_self()
 bool
 TitleScreen::on_message(Object *object, MessageID id, Parameters)
 {
-/*    if (id != Button::clickedID)
+    if (id != Button::clickedID)
     {
         return false;
     }
@@ -78,12 +114,12 @@ TitleScreen::on_message(Object *object, MessageID id, Parameters)
         return false;
     }
 
-    if (button->id() == "ok")
+/*    if (button->id() == "quit")
     {
         set_next("stage1");
     }
-
-    finish();
 */
+    finish();
+
     return true;
 }
