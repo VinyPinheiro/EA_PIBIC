@@ -107,18 +107,7 @@ TitleScreen::on_message(Object *object, MessageID id, Parameters)
         return false;
     }
 
-    Button *button = dynamic_cast<Button *>(object);
-
-    if (not button)
-    {
-        return false;
-    }
-
-/*    if (button->id() == "quit")
-    {
-        set_next("stage1");
-    }
-*/
+    set_next(object->id());
     finish();
 
     return true;
