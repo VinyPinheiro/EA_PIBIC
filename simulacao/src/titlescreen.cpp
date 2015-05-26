@@ -55,7 +55,7 @@ TitleScreen::TitleScreen()
     {
         start->set_text("Iniciar", Color::WHITE);
         start->set_color(Color(0, 0, 0, 128), Color(64, 64, 64, 128));
-        start->set_border(1, Color(128, 128, 128, 128));
+        start->set_border(5, Color(128, 128, 128, 128));
         start->align_to(this, Object::CENTER, Object::NONE);
         start->set_y(260);
         start->add_observer(this);

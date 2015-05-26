@@ -24,8 +24,7 @@ Credits::Credits(const string& next)
 
     set_dimensions(env->canvas->w(), env->canvas->h());
 
-    env->events_manager->register_mouse_button_event_listener(this);
-    env->events_manager->register_keyboard_event_listener(this);
+    env->events_manager->register_listener(this);
 
     shared_ptr<Font> font =
         env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
@@ -84,12 +83,11 @@ Credits::Credits(const string& next)
 Credits::~Credits()
 {
     Environment *env = Environment::get_instance();
-    env->events_manager->unregister_mouse_button_event_listener(this);
-    env->events_manager->unregister_keyboard_event_listener(this);
+    env->events_manager->unregister_listener(this);
 }
 
 bool
-Credits::onMouseButtonEvent(const MouseButtonEvent& event)
+Credits::on_event(const MouseButtonEvent& event)
 {
     if (event.state() == MouseButtonEvent::PRESSED)
     {
@@ -101,7 +99,7 @@ Credits::onMouseButtonEvent(const MouseButtonEvent& event)
 }
 
 bool
-Credits::onKeyboardEvent(const KeyboardEvent& event)
+Credits::on_event(const KeyboardEvent& event)
 {
     if (event.state() == KeyboardEvent::PRESSED)
     {

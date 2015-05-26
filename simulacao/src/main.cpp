@@ -16,7 +16,7 @@ int main(int, char *[])
     try
     {
         Simulation simulation;
-        simulation.init("Simulacao", 1200, 800);
+        simulation.init("Simulação", 1200, 800);
         simulation.run();
     } catch (Exception ex)
     {
