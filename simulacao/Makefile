@@ -11,7 +11,7 @@ CC = g++
 
 CFLAGS = -W -Wall -pedantic -std=c++11 -MMD -g3
 INCLUDES = -Iinclude -I/usr/local/include/ijengine -Itest `sdl2-config --cflags`
-LIBS = -lijengine `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
+LIBS = -lijengine `sdl2-config --libs` -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 SRC = ${wildcard $(SRC_DIR)/*.cpp}
 OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}

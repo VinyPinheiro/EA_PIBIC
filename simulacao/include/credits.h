@@ -9,17 +9,16 @@
 #define CREDITS_H
 
 #include <ijengine/core/level.h>
-#include <ijengine/core/mousebuttoneventlistener.h>
-#include <ijengine/core/keyboardeventlistener.h>
+#include <ijengine/core/listener.h>
 
-class Credits : public Level, MouseButtonEventListener, KeyboardEventListener
+class Credits : public Level, Listener
 {
 public:
     Credits(const string& next = "");
     ~Credits();
 
-    bool onMouseButtonEvent(const MouseButtonEvent& event);
-    bool onKeyboardEvent(const KeyboardEvent& event);
+    bool on_event(const MouseButtonEvent& event);
+    bool on_event(const KeyboardEvent& event);
 
 private:
     void draw_self();
