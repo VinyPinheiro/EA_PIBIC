@@ -8,6 +8,7 @@
 #include "simulation.h"
 #include "titlescreen.h"
 #include "credits.h"
+#include "start.h"
 
 #include <ijengine/util/frontend.h>
 
@@ -41,6 +42,9 @@ Simulation::load_level(const string& id)
     {
         return new Credits("title");
     }
-
+    else if(id == "start")
+	{
+		return new Start();
+	}
     return nullptr;
 }
