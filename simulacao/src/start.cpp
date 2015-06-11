@@ -10,7 +10,7 @@
 using namespace std;
 
 Start::Start()
-    : Level("title")
+    : Level("start")
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
@@ -42,7 +42,7 @@ Start::Start()
 
     font->set_size(45);
 
-    Button *macauba = new Button(this, "Macauba", 450, 100);
+    Button *macauba = new Button(this, "macauba", 450, 100);
 
     if (macauba)
     {
@@ -56,7 +56,7 @@ Start::Start()
 
     add_child(macauba);
 
-    Button *litio = new Button(this, "Litio", 450, 100);
+    Button *litio = new Button(this, "litio", 450, 100);
 
     if (litio)
     {
@@ -70,7 +70,7 @@ Start::Start()
 
     add_child(litio);
 
-    Button *understand = new Button(this, "understend", 450, 100);
+    Button *understand = new Button(this, "understand", 450, 100);
 
     if (understand)
     {

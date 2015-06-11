@@ -9,11 +9,16 @@
 #include "titlescreen.h"
 #include "credits.h"
 #include "start.h"
+#include "macauba.h"
+#include "solo.h"
+#include "gameover.h"
+#include "tractor.h"
+#include "plantio.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("unb")
+    : Game("plantio")
 {
 }
 
@@ -42,9 +47,25 @@ Simulation::load_level(const string& id)
     {
         return new Credits("title");
     }
-    else if(id == "start")
+    else if (id == "start")
 	{
 		return new Start();
-	}
+	} else if (id == "macauba")
+    {
+        return new Macauba();
+    } else if (id == "solo")
+    {
+        return new Solo();
+    } else if (id == "gameover")
+    {
+        return new GameOver("start");
+    } else if (id == "trator")
+    {
+        return new Tractor("plantio");
+    } else if (id == "plantio")
+    {
+        return new Plantio();
+    }
+
     return nullptr;
 }
