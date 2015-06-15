@@ -20,6 +20,12 @@ Tractor::Tractor(const string& next)
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
 
+	shared_ptr<Font> font =
+        env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
+    font->set_size(40);
+    font->set_style(Font::NORMAL);
+    env->canvas->set_font(font);
+
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
 
@@ -54,6 +60,26 @@ Tractor::Tractor(const string& next)
     rs_speed = 250.0;
     rs->set_visible(false);
     add_child(rs);
+    
+    Text *legenda1 = new Text(this, "CO2: Gás Carbonico", Color::BLACK);
+
+    if (legenda1)
+    {
+        legenda1->align_to(this, Object::CENTER, Object::NONE);
+        legenda1->set_position(env->canvas->w() * 0.6, env->canvas->h()*0.28);
+    }
+
+    add_child(legenda1);
+    
+    Text *legenda2 = new Text(this, "RS: Resíduo Sólido", Color::BLACK);
+    
+    if (legenda2)
+    {
+        legenda2->align_to(this, Object::CENTER, Object::NONE);
+        legenda2->set_position(legenda1->x(), legenda1->y()+legenda1->h());
+    }
+
+    add_child(legenda2);
 
     last = 0;
 }

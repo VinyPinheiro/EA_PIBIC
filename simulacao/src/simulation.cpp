@@ -14,11 +14,16 @@
 #include "gameover.h"
 #include "tractor.h"
 #include "plantio.h"
+#include "trabalhadores.h"
+#include "mudas.h"
+#include "adubo.h"
+#include "maintenance.h"
+#include "arvores.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("plantio")
+    : Game("macauba")
 {
 }
 
@@ -65,6 +70,21 @@ Simulation::load_level(const string& id)
     } else if (id == "plantio")
     {
         return new Plantio();
+    } else if (id == "trabalhadores")
+    {
+        return new Workers("mudas");
+    } else if (id == "mudas")
+    {
+        return new Mudas();
+    } else if (id == "adubo")
+    {
+        return new Adubo("maintenance");
+    } else if (id == "maintenance")
+    {
+        return new Maintenance();
+    } else if (id == "arvores")
+    {
+        return new Arvores("colheita");
     }
 
     return nullptr;
