@@ -137,8 +137,6 @@ Arvores::Arvores(const string& next)
 
     add_child(legenda3);
 	
-    last = 0;
-    
     Text *legenda4 = new Text(this, "RS: Resíduo Sólido", Color::BLACK);
     if (legenda4)
     {
@@ -148,7 +146,7 @@ Arvores::Arvores(const string& next)
 
     add_child(legenda4);
 	
-    last = 0;
+    start = last = 0;
 }
 
 void
@@ -161,40 +159,43 @@ Arvores::draw_self()
 void
 Arvores::update_self(unsigned long elapsed)
 {
-    if (last == 0)
-        last = elapsed;
+    if (start == 0 or last == 0)
+    {
+        start = last = elapsed;
+    }
 
     unsigned long delta = elapsed - last;
+    unsigned long duration = elapsed - start;
     
-    if (elapsed/1000 > 2)
+    if (duration/1000 > 2)
     {
         fertilizer->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         fertilizer->set_y(fertilizer->y() + dy);
     }
     
-    if (elapsed/1000 > 3)
+    if (duration/1000 > 3)
     {
         pesticide->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         pesticide->set_y(pesticide->y() + dy);
     }
     
-    if (elapsed/1000 > 4)
+    if (duration/1000 > 4)
     {
         h2o->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         h2o->set_y(h2o->y() + dy);
     }
     
-    if (elapsed/1000 > 5)
+    if (duration/1000 > 5)
     {
         rs->set_visible();
         double dy = (delta/1000.0)*rs_speed;
         rs->set_y(rs->y() - dy);
     }
 
-    if (elapsed/1000 > 15)
+    if (duration/1000 > 9)
     {
         finish();
     }
