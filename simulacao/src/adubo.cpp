@@ -6,6 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "adubo.h"
+#include "global.h"
 
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
@@ -72,34 +73,23 @@ Adubo::Adubo(const string& next)
     rs_speed = 200.0;
     rs->set_visible(false);
     add_child(rs);
-	
-	Image *sprout1 = new Image(this, "res/images/sprout.png");
 
-	if (sprout1)
+	unsigned int distance = env->canvas->w() / 9;
+    unsigned int delta = 50;
+
+    for (unsigned int i = 0; i < seedlings_amount; ++i)
     {
-        sprout1->set_position(25, env->canvas->h() - sprout1->h() - 100);
+        Image *sprout = new Image(this, "res/images/sprout.png");
+
+        if (sprout)
+        {
+            double x = i*distance + delta;
+            sprout->set_position(x - sprout->w() / 2, env->canvas->h() - sprout->h() - 100);
+        }
+
+        add_child(sprout);
     }
 
-    add_child(sprout1);
-    
-    Image *sprout2 = new Image(this, "res/images/sprout.png");
-
-    if (sprout2)
-    {
-        sprout2->set_position(sprout1->w() + 25, env->canvas->h() - sprout2->h() - 100);
-    }
-
-    add_child(sprout2);
-    
-    Image *sprout3 = new Image(this, "res/images/sprout.png");
-
-	if (sprout3)
-    {
-        sprout3->set_position(sprout1->w() + 200, env->canvas->h() - sprout3->h() - 100);
-    }
-
-    add_child(sprout3);
-	
 	Image *ground = new Image(this, "res/images/ground.png");
 
 	if (ground)
@@ -137,8 +127,6 @@ Adubo::Adubo(const string& next)
 
     add_child(legenda3);
 	
-    last = 0;
-    
     Text *legenda4 = new Text(this, "RS: Resíduo Sólido", Color::BLACK);
     if (legenda4)
     {
@@ -147,8 +135,8 @@ Adubo::Adubo(const string& next)
     }
 
     add_child(legenda4);
-	
-    last = 0;
+
+    start = last = 0;
 }
 
 void
@@ -161,40 +149,43 @@ Adubo::draw_self()
 void
 Adubo::update_self(unsigned long elapsed)
 {
-    if (last == 0)
-        last = elapsed;
+    if (start == 0 or last == 0)
+    {
+        start = last = elapsed;
+    }
 
     unsigned long delta = elapsed - last;
-    
-    if (elapsed/1000 > 2)
+    unsigned long duration = elapsed - start;
+
+    if (duration/1000 > 2)
     {
         fertilizer->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         fertilizer->set_y(fertilizer->y() + dy);
     }
     
-    if (elapsed/1000 > 3)
+    if (duration/1000 > 3)
     {
         pesticide->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         pesticide->set_y(pesticide->y() + dy);
     }
     
-    if (elapsed/1000 > 4)
+    if (duration/1000 > 4)
     {
         h2o->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         h2o->set_y(h2o->y() + dy);
     }
     
-    if (elapsed/1000 > 5)
+    if (duration/1000 > 5)
     {
         rs->set_visible();
         double dy = (delta/1000.0)*rs_speed;
         rs->set_y(rs->y() - dy);
     }
 
-    if (elapsed/1000 > 15)
+    if (duration/1000 > 9)
     {
         finish();
     }

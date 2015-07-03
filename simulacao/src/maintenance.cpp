@@ -6,6 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "maintenance.h"
+#include "global.h"
 
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
@@ -28,34 +29,23 @@ Maintenance::Maintenance(const string& next)
 
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
-    
-    Image *tree1 = new Image(this, "res/images/tree.png");
-	
-	if (tree1)
+
+    unsigned int distance = env->canvas->w() / 9;
+    unsigned int delta = 50;
+
+    for (unsigned int i = 0; i < seedlings_amount; ++i)
     {
-        tree1->set_position(25, env->canvas->h() - tree1->h() - 80);
+        Image *tree = new Image(this, "res/images/tree.png");
+
+        if (tree)
+        {
+            double x = i*distance + delta;
+            tree->set_position(x - tree->w() / 2, env->canvas->h() - tree->h() - 80);
+        }
+
+        add_child(tree);
     }
-
-    add_child(tree1);
-    
-    Image *tree2 = new Image(this, "res/images/tree.png");
-
-    if (tree2)
-    {
-        tree2->set_position(tree1->x()+200, env->canvas->h() - tree2->h() - 80);
-    }
-
-    add_child(tree2);
-    
-    Image *tree3 = new Image(this, "res/images/tree.png");
-
-	if (tree3)
-    {
-        tree3->set_position(tree2->x()+200, env->canvas->h() - tree3->h() - 80);
-    }
-
-    add_child(tree3);
-
+ 
     Text *title = new Text(this, "Manutenção", Color::BLACK);
 
     if (title)

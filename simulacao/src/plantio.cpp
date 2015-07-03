@@ -6,6 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "plantio.h"
+#include "global.h"
 
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
@@ -154,6 +155,8 @@ Plantio::on_message(Object *object, MessageID id, Parameters)
         }
         return true;
     }
+
+    seedlings_amount = seedlings;
 
     set_next(object->id());
     finish();

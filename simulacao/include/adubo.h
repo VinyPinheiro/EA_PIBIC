@@ -23,6 +23,8 @@ private:
     void update_self(unsigned long);
 
     Image *rs, *fertilizer, *pesticide, *h2o;
+
+    unsigned long start;
     unsigned long last;
     double rs_speed;
     double fertilizer_speed;

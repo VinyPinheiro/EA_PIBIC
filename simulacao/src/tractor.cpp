@@ -61,7 +61,7 @@ Tractor::Tractor(const string& next)
     rs->set_visible(false);
     add_child(rs);
     
-    Text *legenda1 = new Text(this, "CO2: Gás Carbonico", Color::BLACK);
+    Text *legenda1 = new Text(this, "CO2: Gás Carbônico", Color::BLACK);
 
     if (legenda1)
     {

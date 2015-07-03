@@ -6,6 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "mudas.h"
+#include "global.h"
 
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
@@ -29,33 +30,22 @@ Mudas::Mudas(const string& next)
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
     
-    Image *sprout1 = new Image(this, "res/images/sprout.png");
+    unsigned int distance = env->canvas->w() / 9;
+    unsigned int delta = 50;
 
-    if (sprout1)
+    for (unsigned int i = 0; i < seedlings_amount; ++i)
     {
-        sprout1->set_position(25, env->canvas->h() - sprout1->h() - 100);
-    }
+        Image *sprout = new Image(this, "res/images/sprout.png");
 
-    add_child(sprout1);
+        if (sprout)
+        {
+            double x = i*distance + delta;
+            sprout->set_position(x - sprout->w() / 2, env->canvas->h() - sprout->h() - 100);
+        }
+
+        add_child(sprout);
+    }
     
-    Image *sprout2 = new Image(this, "res/images/sprout.png");
-
-    if (sprout2)
-    {
-        sprout2->set_position(sprout1->w() + 25, env->canvas->h() - sprout2->h() - 100);
-    }
-
-    add_child(sprout2);
-    
-    Image *sprout3 = new Image(this, "res/images/sprout.png");
-
-	if (sprout3)
-    {
-        sprout3->set_position(sprout1->w() + 200, env->canvas->h() - sprout3->h() - 100);
-    }
-
-    add_child(sprout3);
-
     Text *title = new Text(this, "Plantio", Color::BLACK);
 
     if (title)
