@@ -20,6 +20,7 @@ Work::Work(const string& next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
+    env->events_manager->register_listener(this);
 
 	shared_ptr<Font> font =
 	env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
@@ -122,4 +123,35 @@ Work::update_self(unsigned long elapsed)
     }
 
     last = elapsed;
+}
+
+bool
+Work::on_event(const MouseButtonEvent& event)
+{
+    if (event.state() == MouseButtonEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+bool
+Work::on_event(const KeyboardEvent& event)
+{
+    if (event.state() == KeyboardEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+
+Work::~Work()
+{
+	Environment *env = Environment::get_instance();
+	env->events_manager->unregister_listener(this);
 }
