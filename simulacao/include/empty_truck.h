@@ -14,10 +14,14 @@
 
 class Image;
 
-class Empty_truck : public Level
+class Empty_truck : public Level, public Listener
 {
 public:
     Empty_truck(const string& next = "");
+    ~Empty_truck();
+    
+    bool on_event(const KeyboardEvent& event);
+    bool on_event(const MouseButtonEvent& event);
 
 private:
     void draw_self();

@@ -13,10 +13,14 @@
 
 class Image;
 
-class Work : public Level
+class Work : public Level, public Listener
 {
 public:
     Work(const string& next = "");
+    ~Work();
+    
+    bool on_event(const KeyboardEvent& event);
+    bool on_event(const MouseButtonEvent& event);
 
 private:
     void draw_self();

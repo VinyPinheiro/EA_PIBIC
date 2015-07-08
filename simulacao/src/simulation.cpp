@@ -31,7 +31,7 @@
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("macauba")
+    : Game("unb")
 {
 }
 

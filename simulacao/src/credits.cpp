@@ -67,7 +67,7 @@ Credits::Credits(const string& next)
     }
 
     list<string> professors
-    { "Edson Alves da Costa Júnior", "Maria Vitória Duarte Ferrari Tome" };
+    { "Edson Alves da Costa Júnior", "Maria Vitória Duarte Ferrari" };
 
     y = 560;
 

@@ -20,6 +20,7 @@ Empty_truck::Empty_truck(const string& next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
+    env->events_manager->register_listener(this);
 
 	shared_ptr<Font> font =
         env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
@@ -146,4 +147,35 @@ Empty_truck::update_self(unsigned long elapsed)
     }
 
     last = elapsed;
+}
+
+bool
+Empty_truck::on_event(const MouseButtonEvent& event)
+{
+    if (event.state() == MouseButtonEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+bool
+Empty_truck::on_event(const KeyboardEvent& event)
+{
+    if (event.state() == KeyboardEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+
+Empty_truck::~Empty_truck()
+{
+	Environment *env = Environment::get_instance();
+	env->events_manager->unregister_listener(this);
 }

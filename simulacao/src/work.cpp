@@ -6,7 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "work.h"
-//#include "global.h"
+#include "global.h"
 
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
@@ -20,9 +20,10 @@ Work::Work(const string& next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
+    env->events_manager->register_listener(this);
 
 	shared_ptr<Font> font =
-        env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
+	env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
     font->set_size(40);
     font->set_style(Font::NORMAL);
     env->canvas->set_font(font);
@@ -94,7 +95,21 @@ Work::update_self(unsigned long elapsed)
     tractor->set_x(tractor->x() - dx);
 
     Environment *env = Environment::get_instance();
+   	for(int i = seedlings_amount - 1; i >= 0; i--)
+	{
+			if(tractor->x() + tractor->w() - 24 < i * env->canvas->w() / 9)
+			{
+				Image *sprout = new Image(this, "res/images/sprout.png");
 
+				if (sprout)
+				{
+					sprout->set_position( i * env->canvas->w() / 9 + 50 - sprout->w() / 2, env->canvas->h() - sprout->h() - 100);
+				}
+
+				add_child(sprout);
+
+			} 
+	}
     if (tractor->x() < (env->canvas->w() * 2)/3)
     {
         co2->set_visible();
@@ -108,4 +123,35 @@ Work::update_self(unsigned long elapsed)
     }
 
     last = elapsed;
+}
+
+bool
+Work::on_event(const MouseButtonEvent& event)
+{
+    if (event.state() == MouseButtonEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+bool
+Work::on_event(const KeyboardEvent& event)
+{
+    if (event.state() == KeyboardEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+
+Work::~Work()
+{
+	Environment *env = Environment::get_instance();
+	env->events_manager->unregister_listener(this);
 }

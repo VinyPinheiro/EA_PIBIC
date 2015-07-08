@@ -20,9 +20,10 @@ Adubo::Adubo(const string& next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
+    env->events_manager->register_listener(this);
     
     shared_ptr<Font> font =
-        env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
+    env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
     font->set_size(30);
     font->set_style(Font::NORMAL);
     env->canvas->set_font(font);
@@ -139,6 +140,12 @@ Adubo::Adubo(const string& next)
     start = last = 0;
 }
 
+Adubo::~Adubo()
+{
+	Environment *env = Environment::get_instance();
+	env->events_manager->unregister_listener(this);
+}
+
 void
 Adubo::draw_self()
 {
@@ -194,6 +201,18 @@ Adubo::update_self(unsigned long elapsed)
 }
 
 bool
+Adubo::on_event(const MouseButtonEvent& event)
+{
+    if (event.state() == MouseButtonEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+bool
 Adubo::on_event(const KeyboardEvent& event)
 {
     if (event.state() == KeyboardEvent::PRESSED)
@@ -205,14 +224,3 @@ Adubo::on_event(const KeyboardEvent& event)
     return false;
 }
 
-bool
-Adubo::on_event(const MouseButtonEvent& event)
-{
-    if (event.state() == MouseButtonEvent::PRESSED)
-    {
-        finish();
-        return true;
-    }
-
-    return false;
-}

@@ -26,6 +26,7 @@ Arvores::Arvores(const string& next)
     font->set_size(30);
     font->set_style(Font::NORMAL);
     env->canvas->set_font(font);
+    env->events_manager->register_listener(this);
 
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
@@ -139,6 +140,12 @@ Arvores::Arvores(const string& next)
     start = last = 0;
 }
 
+Arvores::~Arvores()
+{
+	Environment *env = Environment::get_instance();
+	env->events_manager->unregister_listener(this);
+}
+
 void
 Arvores::draw_self()
 {
@@ -192,3 +199,28 @@ Arvores::update_self(unsigned long elapsed)
 
     last = elapsed;
 }
+
+bool
+Arvores::on_event(const MouseButtonEvent& event)
+{
+    if (event.state() == MouseButtonEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+bool
+Arvores::on_event(const KeyboardEvent& event)
+{
+    if (event.state() == KeyboardEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+

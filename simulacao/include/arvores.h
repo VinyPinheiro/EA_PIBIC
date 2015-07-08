@@ -13,14 +13,19 @@
 
 class Image;
 
-class Arvores : public Level
+class Arvores : public Level, public Listener
 {
 public:
     Arvores(const string& next = "");
+    ~Arvores();
+    
+    bool on_event(const KeyboardEvent& event);
+    bool on_event(const MouseButtonEvent& event);
 
 private:
     void draw_self();
     void update_self(unsigned long);
+    
 
     Image *rs, *fertilizer, *pesticide, *h2o;
     unsigned long start;
