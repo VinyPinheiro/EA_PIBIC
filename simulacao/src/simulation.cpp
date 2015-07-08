@@ -10,20 +10,27 @@
 #include "credits.h"
 #include "start.h"
 #include "macauba.h"
+#include "choice.h"
 #include "solo.h"
 #include "gameover.h"
 #include "tractor.h"
 #include "plantio.h"
-#include "trabalhadores.h"
+//#include "trabalhadores.h"
+#include "work.h"
 #include "mudas.h"
 #include "adubo.h"
 #include "maintenance.h"
 #include "arvores.h"
+#include "colheita.h"
+#include "empty_truck.h"
+#include "full_truck.h"
+#include "delivery.h"
+#include "industry.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("plantio")
+    : Game("choice")
 {
 }
 
@@ -58,6 +65,9 @@ Simulation::load_level(const string& id)
 	} else if (id == "macauba")
     {
         return new Macauba();
+    } else if (id == "choice")
+    {
+        return new Choice();
     } else if (id == "solo")
     {
         return new Solo();
@@ -70,9 +80,9 @@ Simulation::load_level(const string& id)
     } else if (id == "plantio")
     {
         return new Plantio();
-    } else if (id == "trabalhadores")
+    } else if (id == "work")
     {
-        return new Workers("mudas");
+        return new Work("mudas");
     } else if (id == "mudas")
     {
         return new Mudas();
@@ -85,7 +95,22 @@ Simulation::load_level(const string& id)
     } else if (id == "arvores")
     {
         return new Arvores("colheita");
-    }
-
+    } else if (id == "colheita")
+    {
+        return new Colheita();
+    } else if (id == "empty_truck")
+    {
+        return new Empty_truck("full_truck");
+	} else if (id == "full_truck")
+    {
+        return new Full_truck("delivery");
+	} else if (id == "delivery")
+    {
+        return new Delivery("industry");
+	} else if (id == "industry")
+    {
+        return new Industry("start");
+	}
+	
     return nullptr;
 }

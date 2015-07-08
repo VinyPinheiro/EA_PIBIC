@@ -17,6 +17,9 @@ class Adubo : public Level
 {
 public:
     Adubo(const string& next = "");
+    
+    bool on_event(const KeyboardEvent& event);
+    bool on_event(const MouseButtonEvent& event);
 
 private:
     void draw_self();

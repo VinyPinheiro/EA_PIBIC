@@ -22,14 +22,14 @@ Macauba::Macauba(const string& next)
 
     shared_ptr<Font> font =
         env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
-    font->set_size(90);
+    font->set_size(80);
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
 
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
 
-    Text *title = new Text(this, "Gerenciamento de", Color::BLACK);
+    Text *title = new Text(this, "Variáveis Ambientais", Color::BLACK);
 
     if (title)
     {
@@ -39,7 +39,7 @@ Macauba::Macauba(const string& next)
 
     add_child(title);
 
-    Text *title2 = new Text(this, "Produção de Energia", Color::BLACK);
+    Text *title2 = new Text(this, "nos Processos Produtíveis", Color::BLACK);
 
     if (title2)
     {
@@ -52,7 +52,7 @@ Macauba::Macauba(const string& next)
     font->set_style(Font::NORMAL);
     font->set_size(50);
 
-    Text *subtitle = new Text(this, "Biodiesel - Macaúba", Color(20, 180, 55));
+    Text *subtitle = new Text(this, "Biocombustível - Macaúba", Color(20, 180, 55));
 
     if (subtitle)
     {
@@ -62,7 +62,7 @@ Macauba::Macauba(const string& next)
 
     add_child(subtitle);
     
-    Button *start = new Button(this, "solo", 200, 100);
+    Button *start = new Button(this, "choice", 200, 100);
 
     if (start)
     {

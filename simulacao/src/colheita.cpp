@@ -1,11 +1,11 @@
 /*
- * Implementação da classe Manutenção.
+ * Implementação da classe Colheita.
  *
  * Autor: Camila Ferrer
- * Data: 15/06/2015
+ * Data: 02/07/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "maintenance.h"
+#include "colheita.h"
 #include "global.h"
 
 #include <ijengine/core/text.h>
@@ -13,10 +13,11 @@
 #include <ijengine/core/image.h>
 #include <ijengine/core/environment.h>
 
+
 #include <ijengine/util/button.h>
 
-Maintenance::Maintenance(const string& next)
-    : Level("maintenance", next)
+Colheita::Colheita(const string& next)
+    : Level("colheita", next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
@@ -35,7 +36,7 @@ Maintenance::Maintenance(const string& next)
 
     for (unsigned int i = 0; i < seedlings_amount; ++i)
     {
-        Image *tree = new Image(this, "res/images/tree.png");
+        Image *tree = new Image(this, "res/images/macauba.png");
 
         if (tree)
         {
@@ -45,9 +46,8 @@ Maintenance::Maintenance(const string& next)
 
         add_child(tree);
     }
-    
-     
-    Text *title = new Text(this, "Manutenção", Color::BLACK);
+ 
+    Text *title = new Text(this, "Colheita", Color::BLACK);
 
     if (title)
     {
@@ -60,7 +60,7 @@ Maintenance::Maintenance(const string& next)
     font->set_style(Font::NORMAL);
     font->set_size(50);
 
-    Text *question = new Text(this, "Colocar adubo, pesticida e água?", Color::BLACK);
+    Text *question = new Text(this, "Colher macaúbas maduras?", Color::BLACK);
 
     if (question)
     {
@@ -70,7 +70,7 @@ Maintenance::Maintenance(const string& next)
 
     add_child(question);
 
-    Button *yes = new Button(this, "arvores", 200, 100);
+    Button *yes = new Button(this, "empty_truck", 200, 100);
 
     if (yes)
     {
@@ -100,14 +100,14 @@ Maintenance::Maintenance(const string& next)
 }
 
 void
-Maintenance::draw_self()
+Colheita::draw_self()
 {
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
 }
 
 bool
-Maintenance::on_message(Object *object, MessageID id, Parameters)
+Colheita::on_message(Object *object, MessageID id, Parameters)
 {
     if (id != Button::clickedID)
     {
@@ -119,3 +119,4 @@ Maintenance::on_message(Object *object, MessageID id, Parameters)
 
     return true;
 }
+

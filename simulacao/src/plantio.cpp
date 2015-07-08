@@ -99,7 +99,7 @@ Plantio::Plantio(const string& next)
 
     add_child(minus);
 
-    Button *ok = new Button(this, "trabalhadores", 200, 100);
+    Button *ok = new Button(this, "work", 200, 100);
 
     if (ok)
     {

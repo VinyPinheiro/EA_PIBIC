@@ -6,6 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "arvores.h"
+#include "global.h"
 
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
@@ -22,7 +23,7 @@ Arvores::Arvores(const string& next)
     
     shared_ptr<Font> font =
         env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
-    font->set_size(40);
+    font->set_size(30);
     font->set_style(Font::NORMAL);
     env->canvas->set_font(font);
 
@@ -73,32 +74,21 @@ Arvores::Arvores(const string& next)
     rs->set_visible(false);
     add_child(rs);
 	
-	Image *tree1 = new Image(this, "res/images/tree.png");
-	
-	if (tree1)
+	unsigned int distance = env->canvas->w() / 9;
+    unsigned int delta = 50;
+
+    for (unsigned int i = 0; i < seedlings_amount; ++i)
     {
-        tree1->set_position(25, env->canvas->h() - tree1->h() - 80);
+        Image *tree = new Image(this, "res/images/tree.png");
+
+        if (tree)
+        {
+            double x = i*distance + delta;
+            tree->set_position(x - tree->w() / 2, env->canvas->h() - tree->h() - 100);
+        }
+
+        add_child(tree);
     }
-
-    add_child(tree1);
-    
-    Image *tree2 = new Image(this, "res/images/tree.png");
-
-    if (tree2)
-    {
-        tree2->set_position(tree1->x()+200, env->canvas->h() - tree2->h() - 80);
-    }
-
-    add_child(tree2);
-    
-    Image *tree3 = new Image(this, "res/images/tree.png");
-
-	if (tree3)
-    {
-        tree3->set_position(tree2->x()+200, env->canvas->h() - tree3->h() - 80);
-    }
-
-    add_child(tree3);
 	
 	Image *ground = new Image(this, "res/images/ground.png");
 
@@ -167,35 +157,35 @@ Arvores::update_self(unsigned long elapsed)
     unsigned long delta = elapsed - last;
     unsigned long duration = elapsed - start;
     
-    if (duration/1000 > 2)
+    if (duration/1000 > 0)
     {
         fertilizer->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         fertilizer->set_y(fertilizer->y() + dy);
     }
     
-    if (duration/1000 > 3)
+    if (duration/1000 > 1)
     {
         pesticide->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         pesticide->set_y(pesticide->y() + dy);
     }
     
-    if (duration/1000 > 4)
+    if (duration/1000 > 2)
     {
         h2o->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         h2o->set_y(h2o->y() + dy);
     }
     
-    if (duration/1000 > 5)
+    if (duration/1000 > 1)
     {
         rs->set_visible();
         double dy = (delta/1000.0)*rs_speed;
         rs->set_y(rs->y() - dy);
     }
 
-    if (duration/1000 > 9)
+    if (duration/1000 > 7)
     {
         finish();
     }

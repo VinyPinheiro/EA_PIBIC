@@ -23,7 +23,7 @@ Adubo::Adubo(const string& next)
     
     shared_ptr<Font> font =
         env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
-    font->set_size(40);
+    font->set_size(30);
     font->set_style(Font::NORMAL);
     env->canvas->set_font(font);
 
@@ -157,38 +157,62 @@ Adubo::update_self(unsigned long elapsed)
     unsigned long delta = elapsed - last;
     unsigned long duration = elapsed - start;
 
-    if (duration/1000 > 2)
+    if (duration/1000 > 0)
     {
         fertilizer->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         fertilizer->set_y(fertilizer->y() + dy);
     }
     
-    if (duration/1000 > 3)
+    if (duration/1000 > 1)
     {
         pesticide->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         pesticide->set_y(pesticide->y() + dy);
     }
     
-    if (duration/1000 > 4)
+    if (duration/1000 > 2)
     {
         h2o->set_visible();
         double dy = (delta/1000.0)*fertilizer_speed;
         h2o->set_y(h2o->y() + dy);
     }
     
-    if (duration/1000 > 5)
+    if (duration/1000 > 2)
     {
         rs->set_visible();
         double dy = (delta/1000.0)*rs_speed;
         rs->set_y(rs->y() - dy);
     }
 
-    if (duration/1000 > 9)
+    if (duration/1000 > 6)
     {
         finish();
     }
 
     last = elapsed;
+}
+
+bool
+Adubo::on_event(const KeyboardEvent& event)
+{
+    if (event.state() == KeyboardEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+bool
+Adubo::on_event(const MouseButtonEvent& event)
+{
+    if (event.state() == MouseButtonEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
 }

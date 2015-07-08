@@ -1,11 +1,12 @@
 /*
- * Implementação da classe Tractor.
+ * Implementação da classe Trabalhadores.
  *
- * Autor: Edson Alves
- * Data: 11/06/2015
+ * Autor: Camila Ferrer
+ * Data: 08/07/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "tractor.h"
+#include "work.h"
+//#include "global.h"
 
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
@@ -14,8 +15,8 @@
 #include <ijengine/core/keyboardevent.h>
 #include <ijengine/core/mousebuttonevent.h>
 
-Tractor::Tractor(const string& next)
-    : Level("solo", next)
+Work::Work(const string& next)
+    : Level("plantio", next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
@@ -29,7 +30,7 @@ Tractor::Tractor(const string& next)
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
 
-    tractor = new Image(this, "res/images/tractor_field.png");
+    tractor = new Image(this, "res/images/tractor.png");
 
     if (tractor)
     {
@@ -50,16 +51,6 @@ Tractor::Tractor(const string& next)
     co2->set_visible(false);
     add_child(co2);
 
-    rs = new Image(this, "res/images/rs.png");
-
-    if (rs)
-    {
-        rs->set_position(env->canvas->w() * 0.4, env->canvas->h() - rs->h() - 100);
-    }
-
-    rs_speed = 250.0;
-    rs->set_visible(false);
-    add_child(rs);
     
     Text *legenda1 = new Text(this, "CO2: Gás Carbônico", Color::BLACK);
 
@@ -85,14 +76,14 @@ Tractor::Tractor(const string& next)
 }
 
 void
-Tractor::draw_self()
+Work::draw_self()
 {
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
 }
 
 void
-Tractor::update_self(unsigned long elapsed)
+Work::update_self(unsigned long elapsed)
 {
     if (last == 0)
         last = elapsed;
@@ -109,13 +100,6 @@ Tractor::update_self(unsigned long elapsed)
         co2->set_visible();
         double dy = (delta/1000.0)*co2_speed;
         co2->set_y(co2->y() - dy);
-    }
-
-    if (tractor->x() < env->canvas->w()/3)
-    {
-        rs->set_visible();
-        double dy = (delta/1000.0)*rs_speed;
-        rs->set_y(rs->y() - dy);
     }
 
     if (tractor->x() + tractor->w() < -50)
