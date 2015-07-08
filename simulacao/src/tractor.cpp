@@ -29,7 +29,7 @@ Tractor::Tractor(const string& next)
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
 
-    tractor = new Image(this, "res/images/tractor.png");
+    tractor = new Image(this, "res/images/tractor_field.png");
 
     if (tractor)
     {
@@ -60,7 +60,7 @@ Tractor::Tractor(const string& next)
     rs_speed = 250.0;
     rs->set_visible(false);
     add_child(rs);
-    
+
     Text *legenda1 = new Text(this, "CO2: Gás Carbônico", Color::BLACK);
 
     if (legenda1)
@@ -70,9 +70,9 @@ Tractor::Tractor(const string& next)
     }
 
     add_child(legenda1);
-    
+
     Text *legenda2 = new Text(this, "RS: Resíduo Sólido", Color::BLACK);
-    
+
     if (legenda2)
     {
         legenda2->align_to(this, Object::CENTER, Object::NONE);
