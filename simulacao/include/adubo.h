@@ -13,11 +13,12 @@
 
 class Image;
 
-class Adubo : public Level
+class Adubo : public Level, public Listener
 {
 public:
     Adubo(const string& next = "");
-    
+    ~Adubo();
+
     bool on_event(const KeyboardEvent& event);
     bool on_event(const MouseButtonEvent& event);
 
