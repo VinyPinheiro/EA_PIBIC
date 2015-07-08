@@ -7,7 +7,7 @@
  */
 #include "adubo.h"
 #include "global.h"
-#include <iostream>
+
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
 #include <ijengine/core/image.h>
@@ -199,10 +199,10 @@ Adubo::update_self(unsigned long elapsed)
 
     last = elapsed;
 }
+
 bool
 Adubo::on_event(const MouseButtonEvent& event)
 {
-	std::cerr << "Mouse"<<std::endl;
     if (event.state() == MouseButtonEvent::PRESSED)
     {
         finish();
@@ -215,7 +215,6 @@ Adubo::on_event(const MouseButtonEvent& event)
 bool
 Adubo::on_event(const KeyboardEvent& event)
 {
-	std::cerr << "Teclado"<<std::endl;
     if (event.state() == KeyboardEvent::PRESSED)
     {
         finish();

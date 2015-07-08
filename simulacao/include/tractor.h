@@ -13,10 +13,14 @@
 
 class Image;
 
-class Tractor : public Level
+class Tractor : public Level, public Listener
 {
 public:
     Tractor(const string& next = "");
+    ~Tractor();
+
+    bool on_event(const KeyboardEvent& event);
+    bool on_event(const MouseButtonEvent& event);
 
 private:
     void draw_self();
