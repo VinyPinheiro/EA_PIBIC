@@ -14,10 +14,14 @@
 
 class Image;
 
-class Delivery : public Level
+class Delivery : public Level, public Listener
 {
 public:
     Delivery(const string& next = "");
+    ~Delivery();
+    bool on_event(const MouseButtonEvent& event);
+    bool on_event(const KeyboardEvent& event);
+
 
 private:
     void draw_self();

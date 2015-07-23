@@ -23,13 +23,14 @@ Industry::Industry(const string& next)
 
     shared_ptr<Font> font =
         env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
+
     font->set_size(90);
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
 
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
-    
+
     Image *industry = new Image(this, "res/images/industry.png");
 
     if (industry)

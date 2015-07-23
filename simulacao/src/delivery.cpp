@@ -21,8 +21,9 @@ Delivery::Delivery(const string& next)
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
 
-	shared_ptr<Font> font =
-        env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
+    env->events_manager->register_listener(this);
+	  shared_ptr<Font> font =
+      env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
     font->set_size(35);
     font->set_style(Font::NORMAL);
     env->canvas->set_font(font);
@@ -59,7 +60,7 @@ Delivery::Delivery(const string& next)
     }
 
     add_child(industry);
-    
+
     Image *ground = new Image(this, "res/images/ground.png");
 
 	if (ground)
@@ -68,7 +69,7 @@ Delivery::Delivery(const string& next)
     }
 
     add_child(ground);
-    
+
     Text *legenda1 = new Text(this, "CO2: Gás Carbônico", Color::BLACK);
 
     if (legenda1)
@@ -78,9 +79,15 @@ Delivery::Delivery(const string& next)
     }
 
     add_child(legenda1);
-    
-    
+
+
     last = 0;
+}
+
+Delivery::~Delivery()
+{
+    Environment *env = Environment::get_instance();
+    env->events_manager->unregister_listener(this);
 }
 
 void
@@ -110,11 +117,35 @@ Delivery::update_self(unsigned long elapsed)
         co2->set_y(co2->y() - dy);
     }
 
-    
+
     if (truck->x() - 50 > (env->canvas->w() * 0.5))
     {
         finish();
     }
 
     last = elapsed;
+}
+
+bool
+Delivery::on_event(const MouseButtonEvent& event)
+{
+    if (event.state() == MouseButtonEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
+}
+
+bool
+Delivery::on_event(const KeyboardEvent& event)
+{
+    if (event.state() == KeyboardEvent::PRESSED)
+    {
+        finish();
+        return true;
+    }
+
+    return false;
 }

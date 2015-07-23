@@ -62,7 +62,7 @@ Full_truck::Full_truck(const string& next)
     rs_speed = 250.0;
     rs->set_visible(false);
     add_child(rs);
-    
+
     ro = new Image(this, "res/images/ro.png");
 
     if (ro)
@@ -73,7 +73,7 @@ Full_truck::Full_truck(const string& next)
     ro_speed = 250.0;
     ro->set_visible(false);
     add_child(ro);
-    
+
     unsigned int distance = env->canvas->w() / 9;
     unsigned int delta = 50;
 
@@ -89,8 +89,8 @@ Full_truck::Full_truck(const string& next)
 
         add_child(tree);
     }
-    
-    
+
+
     Image *ground = new Image(this, "res/images/ground.png");
 
 	if (ground)
@@ -99,7 +99,7 @@ Full_truck::Full_truck(const string& next)
     }
 
     add_child(ground);
-    
+
     Text *legenda1 = new Text(this, "CO2: Gás Carbônico", Color::BLACK);
 
     if (legenda1)
@@ -109,9 +109,9 @@ Full_truck::Full_truck(const string& next)
     }
 
     add_child(legenda1);
-    
+
     Text *legenda2 = new Text(this, "RS: Resíduo Sólido", Color::BLACK);
-    
+
     if (legenda2)
     {
         legenda2->align_to(this, Object::CENTER, Object::NONE);
@@ -121,9 +121,9 @@ Full_truck::Full_truck(const string& next)
     add_child(legenda2);
 
     last = 0;
-    
+
     Text *legenda3 = new Text(this, "RO: Resíduo Orgânico", Color::BLACK);
-    
+
     if (legenda3)
     {
         legenda3->align_to(this, Object::CENTER, Object::NONE);
@@ -168,7 +168,7 @@ Full_truck::update_self(unsigned long elapsed)
         double dy = (delta/1000.0)*rs_speed;
         rs->set_y(rs->y() - dy);
     }
-    
+
     if (truck->x() > env->canvas->w()*0.5)
     {
         ro->set_visible();

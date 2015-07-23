@@ -52,7 +52,7 @@ Empty_truck::Empty_truck(const string& next)
     co2->set_visible(false);
     add_child(co2);
 
-    
+
     unsigned int distance = env->canvas->w() / 9;
     unsigned int delta = 50;
 
@@ -68,8 +68,8 @@ Empty_truck::Empty_truck(const string& next)
 
         add_child(tree);
     }
-    
-    
+
+
     Image *ground = new Image(this, "res/images/ground.png");
 
 	if (ground)
@@ -78,7 +78,7 @@ Empty_truck::Empty_truck(const string& next)
     }
 
     add_child(ground);
-    
+
     Text *legenda1 = new Text(this, "CO2: Gás Carbônico", Color::BLACK);
 
     if (legenda1)
@@ -88,9 +88,9 @@ Empty_truck::Empty_truck(const string& next)
     }
 
     add_child(legenda1);
-    
+
     Text *legenda2 = new Text(this, "RS: Resíduo Sólido", Color::BLACK);
-    
+
     if (legenda2)
     {
         legenda2->align_to(this, Object::CENTER, Object::NONE);
@@ -100,9 +100,9 @@ Empty_truck::Empty_truck(const string& next)
     add_child(legenda2);
 
     last = 0;
-    
+
     Text *legenda3 = new Text(this, "RO: Resíduo Orgânico", Color::BLACK);
-    
+
     if (legenda3)
     {
         legenda3->align_to(this, Object::CENTER, Object::NONE);

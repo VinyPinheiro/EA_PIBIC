@@ -27,6 +27,7 @@
 #include "delivery.h"
 #include "industry.h"
 #include "filter.h"
+#include "despolpamento.h"
 
 #include <ijengine/util/frontend.h>
 
@@ -113,8 +114,12 @@ Simulation::load_level(const string& id)
         return new Industry("filter");
 	}else if(id=="filter")
       {
-        return new Filter(); 
+        return new Filter("despolpamento");
        }
-	
+  else if(id == "despolpamento")
+  {
+    return new Despolpamento("start");
+  }
+
     return nullptr;
 }
