@@ -1,5 +1,7 @@
 #include "despolpamentoAnimation.h"
 #include "global.h"
+#include "cano.h"
+#include <vector>
 
 #include <ijengine/core/text.h>
 #include <ijengine/core/animation.h>
@@ -7,7 +9,6 @@
 #include <ijengine/core/image.h>
 #include <ijengine/core/environment.h>
 
-#include <ijengine/util/button.h>
 
 DespolpamentoAnimation::DespolpamentoAnimation(const string& next)
     : Level("mudas", next)
@@ -24,8 +25,16 @@ DespolpamentoAnimation::DespolpamentoAnimation(const string& next)
     Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
     
-    //Animation *cano1 = new Animation()
-    
+    Cano *cano = new Cano(this, 0, 129, Cano::RETO);
+    cano->fill();
+    m_canos.push_back(cano);
+    add_child(cano);
+
+    cano = new Cano(this, 200, 102, Cano::RETO);
+    m_canos.push_back(cano);
+    add_child(cano);
+
+    m_cano = 0;
 }
 
 void
@@ -35,16 +44,14 @@ DespolpamentoAnimation::draw_self()
     env->canvas->clear(Color::WHITE);
 }
 
-bool
-DespolpamentoAnimation::on_message(Object *object, MessageID id, Parameters)
+void
+DespolpamentoAnimation::update_self(unsigned long elapsed)
 {
-    if (id != Button::clickedID)
+    if (m_canos[m_cano]->filled() and m_cano + 1 < (int) m_canos.size())
     {
-        return false;
+        m_cano++;
+        m_canos[m_cano]->fill();
     }
 
-    set_next(object->id());
-    finish();
-
-    return true;
+    m_canos[m_cano]->update(elapsed);
 }
