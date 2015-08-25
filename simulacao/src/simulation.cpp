@@ -32,7 +32,7 @@
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("unb")
+    : Game("industry")
 {
 }
 
@@ -111,15 +111,12 @@ Simulation::load_level(const string& id)
         return new Delivery("industry");
 	} else if (id == "industry")
     {
-        return new Industry("filter");
-	}else if(id=="filter")
-      {
-        return new Filter("despolpamento");
-       }
-  else if(id == "despolpamento")
-  {
-    return new Despolpamento("start");
-  }
+        return new Industry("despolpamento");
+	}
+    else if(id == "despolpamento")
+    {
+        return new Despolpamento("start");
+    }
 
     return nullptr;
 }

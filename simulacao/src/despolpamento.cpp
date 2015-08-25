@@ -20,7 +20,7 @@ Despolpamento::Despolpamento(const string& next)
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
 
-    Image *image = new Image(this, "res/images/background_industry.png");
+    Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
 
     Text *title = new Text(this, "Despolpamento", Color::BLACK);
@@ -69,7 +69,7 @@ Despolpamento::Despolpamento(const string& next)
 
     add_child(yes);
 
-    Button *no = new Button(this, "", 200, 100);
+    Button *no = new Button(this, "gameover", 200, 100);
 
     if (no)
     {
