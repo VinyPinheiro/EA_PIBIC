@@ -1,6 +1,7 @@
 #include "despolpamentoAnimation.h"
 #include "global.h"
 #include "cano.h"
+#include "gear.h"
 #include <vector>
 
 #include <ijengine/core/text.h>
@@ -33,6 +34,10 @@ DespolpamentoAnimation::DespolpamentoAnimation(const string& next)
     cano = new Cano(this, 200, 102, Cano::RETO);
     m_canos.push_back(cano);
     add_child(cano);
+
+    Gear *gear = new Gear(this, 70, 60);
+    add_child(gear);
+    gear->start();
 
     m_cano = 0;
 }
