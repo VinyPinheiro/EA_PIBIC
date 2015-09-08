@@ -15,6 +15,7 @@ Gear::Gear(Object *parent, double x, double y)
     add_child(machine);
 
     m_coins = 0;
+    m_coin->set_visible(false);
 }
 
 void
@@ -29,6 +30,7 @@ Gear::update_self(unsigned long)
 {
     if (m_working and m_coins < 3)
     {
+        m_coin->set_visible(true);
         if (m_coin->stopped())
         {
             ++m_coins;
@@ -51,5 +53,5 @@ Gear::draw_self()
 bool
 Gear::stopped() const
 {
-    return false;
+    return m_coins >= 3;
 }

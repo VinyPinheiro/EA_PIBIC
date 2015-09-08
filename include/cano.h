@@ -4,15 +4,17 @@
 #include <ijengine/core/level.h>
 #include <ijengine/core/animation.h>
 
-class Cano : public Object
+#include "factory_component.h"
+
+class Cano : public FactoryComponent
 {
 public:
     typedef enum { RETO1, RETO2, RETO3, RETO4, CURVO1, CURVO2, CURVO3, CURVO4, CURVO5, CURVO6, CURVO7, CURVO8, T } Tipo;
 
     Cano(Object *parent, double x, double y, Tipo tipo);
 
-    void fill();
-    bool filled() const;
+    void start();
+    bool stopped() const;
 
 private:
     void update_self(unsigned long elapsed);

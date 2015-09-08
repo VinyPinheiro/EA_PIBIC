@@ -34,7 +34,7 @@ Prensagem_PolpaAnimation::Prensagem_PolpaAnimation(const string& next)
 	//if(gear->stopped())
 	{
 	Cano *cano = new Cano(this, 240, 550, Cano::RETO1);
-		cano->fill();
+		cano->start();
 		m_canos.push_back(cano);
 		add_child(cano);
 	cano = new Cano(this, 320, 550, Cano::RETO1);
@@ -80,15 +80,15 @@ Prensagem_PolpaAnimation::draw_self()
 void
 Prensagem_PolpaAnimation::update_self(unsigned long elapsed)
 {
-    if (m_canos[m_cano]->filled() and m_cano + 1 < (int) m_canos.size())
+    if (m_canos[m_cano]->stopped() and m_cano + 1 < (int) m_canos.size())
     {
         m_cano++;
-        m_canos[m_cano]->fill();
+        m_canos[m_cano]->start();
     }
 
     m_canos[m_cano]->update(elapsed);
     
-    if (m_canos[m_cano]->filled() and m_cano + 1 >= (int) m_canos.size()){
+    if (m_canos[m_cano]->stopped() and m_cano + 1 >= (int) m_canos.size()){
 		finish();
 	}
     

@@ -34,7 +34,7 @@ FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
 	//if(gear->stopped())
 	{
 	Cano *cano = new Cano(this, 480, 380, Cano::CURVO6);
-		cano->fill();
+		cano->start();
 		m_canos.push_back(cano);
 		add_child(cano);
 	cano = new Cano(this, 520, 300, Cano::RETO4);
@@ -68,15 +68,15 @@ FragmentacaoAnimation::draw_self()
 void
 FragmentacaoAnimation::update_self(unsigned long elapsed)
 {
-    if (m_canos[m_cano]->filled() and m_cano + 1 < (int) m_canos.size())
+    if (m_canos[m_cano]->stopped() and m_cano + 1 < (int) m_canos.size())
     {
         m_cano++;
-        m_canos[m_cano]->fill();
+        m_canos[m_cano]->start();
     }
 
     m_canos[m_cano]->update(elapsed);
     
-    if (m_canos[m_cano]->filled() and m_cano + 1 >= (int) m_canos.size()){
+    if (m_canos[m_cano]->stopped() and m_cano + 1 >= (int) m_canos.size()){
 		finish();
 	}
     

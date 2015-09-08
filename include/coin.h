@@ -19,6 +19,7 @@ private:
     bool m_working;
     Image *m_coin;
     double m_target;
+    double m_initial_time;
 };
 
 #endif

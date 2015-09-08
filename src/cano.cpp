@@ -1,7 +1,7 @@
 #include "cano.h"
 
 Cano::Cano(Object *parent, double x, double y, Tipo tipo)
-    : Object(parent, "cano", x, y)
+    : FactoryComponent(parent, "cano", x, y)
 {
     switch (tipo) {
     case RETO1:
@@ -64,7 +64,7 @@ Cano::Cano(Object *parent, double x, double y, Tipo tipo)
 }
 
 void
-Cano::fill()
+Cano::start()
 {
     m_filling = true;
 }
@@ -88,7 +88,7 @@ Cano::draw_self()
 }
 
 bool
-Cano::filled() const
+Cano::stopped() const
 {
     return m_animation && m_animation->is_done();
 }

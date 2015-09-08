@@ -26,69 +26,57 @@ DespolpamentoAnimation::DespolpamentoAnimation(const string& next)
     Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
     
-    Cano *cano = new Cano(this, 0, 125, Cano::RETO1);
-    cano->fill();
-    m_canos.push_back(cano);
-    add_child(cano);
-/*
-	Gear *gear = new Gear(this, 70, 60);
-    add_child(gear);
-    gear->start();
-*/
-	/*if(gear->stopped()){
-		
-	}*/
-	{//Parte 1
-	cano = new Cano(this, 200, 150, Cano::CURVO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 200, 230, Cano::CURVO2);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 120, 270, Cano::RETO2);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 40, 270, Cano::CURVO8);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 40, 350, Cano::RETO3);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 40, 430, Cano::RETO3);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 40, 510, Cano::CURVO7);
-		m_canos.push_back(cano);
-		add_child(cano);
-	}
-	
-	{//Parte 2
-	cano = new Cano(this, 200, 100, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 280, 100, Cano::CURVO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 320, 180, Cano::RETO3);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 280, 260, Cano::CURVO2);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 200, 300, Cano::CURVO8);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 200, 380, Cano::CURVO7);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 280, 420, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	
-	}
-    
-    m_cano = 0;
-    
+    add_component(CANO, 0, 125);
+    add_component(GEAR, 70, 60);
+	add_component(CANO, 200, 150, Cano::CURVO1);
+	add_component(CANO, 200, 230, Cano::CURVO2);
+	add_component(CANO, 120, 270, Cano::RETO2);
+	add_component(CANO, 40, 270, Cano::CURVO8);
+	add_component(CANO, 40, 350, Cano::RETO3);
+	add_component(CANO, 40, 430, Cano::RETO3);
+	add_component(CANO, 40, 510, Cano::CURVO7);
+
+    m_connections[1].push_back((int) m_components.size());
+
+	add_component(CANO, 200, 100, Cano::RETO1);
+	add_component(CANO, 280, 100, Cano::CURVO1);
+	add_component(CANO, 320, 180, Cano::RETO3);
+	add_component(CANO, 280, 260, Cano::CURVO2);
+	add_component(CANO, 200, 300, Cano::CURVO8);
+	add_component(CANO, 200, 380, Cano::CURVO7);
+	add_component(CANO, 280, 420, Cano::RETO1);
+
+    m_connections.back().clear();
+    m_active.push_back(0);
+    m_components[0]->start();
+}
+
+
+void
+DespolpamentoAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
+{
+    switch (type) {
+    case CANO:
+        {
+	        Cano *cano = new Cano(this, x, y, p);
+            m_components.push_back(cano);
+
+            list<int> connections { (int) m_connections.size() + 1 };
+            m_connections.push_back(connections);
+            add_child(cano);
+        }
+        break;
+
+    case GEAR:
+        {
+	        Gear *gear = new Gear(this, x, y);
+            m_components.push_back(gear);
+
+            list<int> connections { (int) m_connections.size() + 1 };
+            m_connections.push_back(connections);
+            add_child(gear);
+        }
+    }
 }
 
 void
@@ -101,16 +89,27 @@ DespolpamentoAnimation::draw_self()
 void
 DespolpamentoAnimation::update_self(unsigned long elapsed)
 {
-    if (m_canos[m_cano]->filled() and m_cano + 1 < (int) m_canos.size())
-    {
-        m_cano++;
-        m_canos[m_cano]->fill();
-    }
+    auto active = m_active;
 
-    m_canos[m_cano]->update(elapsed);
-    
-    if (m_canos[m_cano]->filled() and m_cano + 1 >= (int) m_canos.size()){
+    for (auto a : active)
+    {
+        if (m_components[a]->stopped())
+        {
+            for (auto c : m_connections[a])
+            {
+                m_components[c]->start();
+                m_active.push_back(c);
+            }
+
+            m_active.remove(a);
+        } else
+        {
+            m_components[a]->update(elapsed);
+        }
+    } 
+
+    if (m_active.empty())
+    {
 		finish();
 	}
-    
 }
