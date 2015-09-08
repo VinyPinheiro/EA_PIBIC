@@ -9,7 +9,7 @@
 #include <ijengine/util/button.h>
 
 Despolpamento::Despolpamento(const string& next)
-    : Level("mudas", next)
+    : Level("industry", next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
@@ -23,7 +23,7 @@ Despolpamento::Despolpamento(const string& next)
     Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
 
-    Text *title = new Text(this, "Despolpamento", Color::BLACK);
+    Text *title = new Text(this, "Despolpa", Color::BLACK);
 
     if (title)
     {

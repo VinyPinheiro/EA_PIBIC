@@ -15,7 +15,6 @@
 #include "gameover.h"
 #include "tractor.h"
 #include "plantio.h"
-//#include "trabalhadores.h"
 #include "work.h"
 #include "mudas.h"
 #include "adubo.h"
@@ -26,14 +25,19 @@
 #include "full_truck.h"
 #include "delivery.h"
 #include "industry.h"
-#include "filter.h"
 #include "despolpamento.h"
 #include "despolpamentoAnimation.h"
+#include "prensagem_polpa.h"
+#include "prensagem_polpaAnimation.h"
+#include "fragmentacao.h"
+#include "fragmentacaoAnimation.h"
+
+//#include "filter.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("industry")
+    : Game("despolpamento")
 {
 }
 
@@ -116,11 +120,27 @@ Simulation::load_level(const string& id)
 	}
     else if(id == "despolpamento")
     {
-        return new Despolpamento("start");
+        return new Despolpamento();
     }
     else if(id == "despolpamentoAnimation")
     {
-		return new DespolpamentoAnimation("");
+		return new DespolpamentoAnimation("prensagem_polpa");
+	}
+	else if(id == "prensagem_polpa")
+    {
+		return new Prensagem_Polpa();
+	}
+	else if(id == "prensagem_polpaAnimation")
+    {
+		return new Prensagem_PolpaAnimation("fragmentacao");
+	}
+	else if(id == "fragmentacao")
+    {
+		return new Fragmentacao();
+	}
+	else if(id == "fragmentacaoAnimation")
+    {
+		return new FragmentacaoAnimation();
 	}
 
     return nullptr;

@@ -7,7 +7,7 @@
 class Cano : public Object
 {
 public:
-    typedef enum { RETO, CURVO, T } Tipo;
+    typedef enum { RETO1, RETO2, RETO3, RETO4, CURVO1, CURVO2, CURVO3, CURVO4, CURVO5, CURVO6, CURVO7, CURVO8, T } Tipo;
 
     Cano(Object *parent, double x, double y, Tipo tipo);
 

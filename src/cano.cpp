@@ -4,10 +4,58 @@ Cano::Cano(Object *parent, double x, double y, Tipo tipo)
     : Object(parent, "cano", x, y)
 {
     switch (tipo) {
-    case RETO:
-        m_animation = new Animation("res/images/canoreto.png", 0, 0, 80, 40, 6, 150);
+    case RETO1:
+        m_animation = new Animation("res/images/cano_reto_tipo_1.png", 0, 0, 80, 40, 6, 150);
         break;
-
+        
+    case RETO2:
+        m_animation = new Animation("res/images/cano_reto_tipo_2.png", 0, 0, 80, 40, 6, 150);
+        break;
+    
+    case RETO3:
+        m_animation = new Animation("res/images/cano_reto_tipo_3.png", 0, 0, 40, 80, 6, 150);
+        break;
+    
+    case RETO4:
+        m_animation = new Animation("res/images/cano_reto_tipo_4.png", 0, 0, 40, 80, 6, 150);
+        break;
+    
+    case CURVO1:
+        m_animation = new Animation("res/images/cano_curvo_tipo_1.png", 0, 0, 80, 80, 5, 150);
+        break;
+        
+    case CURVO2:
+        m_animation = new Animation("res/images/cano_curvo_tipo_2.png", 0, 0, 80, 80, 5, 150);
+        break;
+	
+	case CURVO3:
+        m_animation = new Animation("res/images/cano_curvo_tipo_3.png", 0, 0, 80, 80, 5, 150);
+        break;
+     
+    case CURVO4:
+        m_animation = new Animation("res/images/cano_curvo_tipo_4.png", 0, 0, 80, 80, 5, 150);
+        break;
+	
+	case CURVO5:
+        m_animation = new Animation("res/images/cano_curvo_tipo_5.png", 0, 0, 80, 80, 5, 150);
+        break;
+	
+	case CURVO6:
+        m_animation = new Animation("res/images/cano_curvo_tipo_6.png", 0, 0, 80, 80, 5, 150);
+        break;
+	
+	case CURVO7:
+        m_animation = new Animation("res/images/cano_curvo_tipo_7.png", 0, 0, 80, 80, 5, 150);
+        break;
+	
+	case CURVO8:
+        m_animation = new Animation("res/images/cano_curvo_tipo_8.png", 0, 0, 80, 80, 5, 150);
+        break;
+	
+	case T:
+        m_animation = new Animation("res/images/cano_T.png", 0, 0, 80, 80, 5, 150);
+        break;
+	
     default:
         m_animation = nullptr;
     }
