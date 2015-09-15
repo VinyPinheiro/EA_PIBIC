@@ -31,13 +31,21 @@
 #include "prensagem_polpaAnimation.h"
 #include "fragmentacao.h"
 #include "fragmentacaoAnimation.h"
+#include "separacao.h"
+#include "separacaoAnimation.h"
+#include "amendoa.h"
+#include "amendoaAnimation.h"
+#include "trituracao.h"
+#include "trituracaoAnimation.h"
+#include "aglutinagem.h"
+#include "aglutinagemAnimation.h"
 
 //#include "filter.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("despolpamento")
+    : Game("amendoa")
 {
 }
 
@@ -140,7 +148,39 @@ Simulation::load_level(const string& id)
 	}
 	else if(id == "fragmentacaoAnimation")
     {
-		return new FragmentacaoAnimation();
+		return new FragmentacaoAnimation("separacao");
+	}
+	else if(id == "separacao")
+    {
+		return new Separacao();
+	}
+	else if(id == "separacaoAnimation")
+    {
+		return new SeparacaoAnimation("amendoa");
+	}
+	else if(id == "amendoa")
+    {
+		return new Amendoa();
+	}
+	else if(id == "amendoaAnimation")
+    {
+		return new AmendoaAnimation("trituracao");
+	}
+	else if(id == "trituracao")
+    {
+		return new Trituracao();
+	}
+	else if(id == "trituracaoAnimation")
+    {
+		return new TrituracaoAnimation("aglutinagem");
+	}
+	else if(id == "aglutinagem")
+    {
+		return new Aglutinagem();
+	}
+	else if(id == "aglutinagemAnimation")
+    {
+		return new AglutinagemAnimation();
 	}
 
     return nullptr;

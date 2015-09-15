@@ -22,52 +22,55 @@ Prensagem_PolpaAnimation::Prensagem_PolpaAnimation(const string& next)
     font->set_size(90);
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
-
-    Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
-    add_child(image);
-    
-/*
-	Gear *gear = new Gear(this, 110, 490);
-    add_child(gear);
-    gear->start();
-*/
-	//if(gear->stopped())
-	{
-	Cano *cano = new Cano(this, 240, 550, Cano::RETO1);
-		cano->start();
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 320, 550, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 400, 550, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 480, 550, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 560, 550, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 640, 550, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 720, 550, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 800, 550, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 880, 530, Cano::T);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 920, 610, Cano::RETO3);
-		m_canos.push_back(cano);
-		add_child(cano);
-	}
 	
-    m_cano = 0;
-    
+	Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
+    add_child(image);
+	
+    add_component(GEAR, 110, 490);
+	add_component(CANO, 240, 550, Cano::RETO1);
+	add_component(CANO, 320, 550, Cano::RETO1);
+	add_component(CANO, 400, 550, Cano::RETO1);
+	add_component(CANO, 480, 550, Cano::RETO1);
+	add_component(CANO, 560, 550, Cano::RETO1);
+	add_component(CANO, 640, 550, Cano::RETO1);
+	add_component(CANO, 720, 550, Cano::RETO1);
+	add_component(CANO, 800, 550, Cano::RETO1);
+	add_component(CANO, 880, 530, Cano::T);
+	add_component(CANO, 920, 610, Cano::RETO3);
+
+    //m_connections[1].push_back((int) m_components.size());
+
+    m_connections.back().clear();
+    m_active.push_back(0);
+    m_components[0]->start();
+}
+
+
+void
+Prensagem_PolpaAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
+{
+    switch (type) {
+    case CANO:
+        {
+	        Cano *cano = new Cano(this, x, y, p);
+            m_components.push_back(cano);
+
+            list<int> connections { (int) m_connections.size() + 1 };
+            m_connections.push_back(connections);
+            add_child(cano);
+        }
+        break;
+
+    case GEAR:
+        {
+	        Gear *gear = new Gear(this, x, y);
+            m_components.push_back(gear);
+
+            list<int> connections { (int) m_connections.size() + 1 };
+            m_connections.push_back(connections);
+            add_child(gear);
+        }
+    }
 }
 
 void
@@ -80,16 +83,27 @@ Prensagem_PolpaAnimation::draw_self()
 void
 Prensagem_PolpaAnimation::update_self(unsigned long elapsed)
 {
-    if (m_canos[m_cano]->stopped() and m_cano + 1 < (int) m_canos.size())
-    {
-        m_cano++;
-        m_canos[m_cano]->start();
-    }
+    auto active = m_active;
 
-    m_canos[m_cano]->update(elapsed);
-    
-    if (m_canos[m_cano]->stopped() and m_cano + 1 >= (int) m_canos.size()){
+    for (auto a : active)
+    {
+        if (m_components[a]->stopped())
+        {
+            for (auto c : m_connections[a])
+            {
+                m_components[c]->start();
+                m_active.push_back(c);
+            }
+
+            m_active.remove(a);
+        } else
+        {
+            m_components[a]->update(elapsed);
+        }
+    } 
+
+    if (m_active.empty())
+    {
 		finish();
 	}
-    
 }

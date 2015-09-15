@@ -26,36 +26,45 @@ FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
     Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
     
-/*
-	Gear *gear = new Gear(this, 350, 340);
-    add_child(gear);
-    gear->start();
-*/
-	//if(gear->stopped())
-	{
-	Cano *cano = new Cano(this, 480, 380, Cano::CURVO6);
-		cano->start();
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 520, 300, Cano::RETO4);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 480, 220, Cano::CURVO5);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 400, 180, Cano::CURVO3);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 400, 100, Cano::CURVO4);
-		m_canos.push_back(cano);
-		add_child(cano);
-	cano = new Cano(this, 480, 100, Cano::RETO1);
-		m_canos.push_back(cano);
-		add_child(cano);
-	}
+    add_component(GEAR, 350, 340);
+	add_component(CANO, 480, 380, Cano::CURVO6);
+	add_component(CANO, 520, 300, Cano::RETO4);
+	add_component(CANO, 480, 220, Cano::CURVO5);
+	add_component(CANO, 400, 180, Cano::CURVO3);
+	add_component(CANO, 400, 100, Cano::CURVO4);
+	add_component(CANO, 480, 100, Cano::RETO1);
 	
-    m_cano = 0;
-    
+    m_connections.back().clear();
+    m_active.push_back(0);
+    m_components[0]->start();
+}
+
+
+void
+FragmentacaoAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
+{
+    switch (type) {
+    case CANO:
+        {
+	        Cano *cano = new Cano(this, x, y, p);
+            m_components.push_back(cano);
+
+            list<int> connections { (int) m_connections.size() + 1 };
+            m_connections.push_back(connections);
+            add_child(cano);
+        }
+        break;
+
+    case GEAR:
+        {
+	        Gear *gear = new Gear(this, x, y);
+            m_components.push_back(gear);
+
+            list<int> connections { (int) m_connections.size() + 1 };
+            m_connections.push_back(connections);
+            add_child(gear);
+        }
+    }
 }
 
 void
@@ -68,16 +77,27 @@ FragmentacaoAnimation::draw_self()
 void
 FragmentacaoAnimation::update_self(unsigned long elapsed)
 {
-    if (m_canos[m_cano]->stopped() and m_cano + 1 < (int) m_canos.size())
-    {
-        m_cano++;
-        m_canos[m_cano]->start();
-    }
+    auto active = m_active;
 
-    m_canos[m_cano]->update(elapsed);
-    
-    if (m_canos[m_cano]->stopped() and m_cano + 1 >= (int) m_canos.size()){
+    for (auto a : active)
+    {
+        if (m_components[a]->stopped())
+        {
+            for (auto c : m_connections[a])
+            {
+                m_components[c]->start();
+                m_active.push_back(c);
+            }
+
+            m_active.remove(a);
+        } else
+        {
+            m_components[a]->update(elapsed);
+        }
+    } 
+
+    if (m_active.empty())
+    {
 		finish();
 	}
-    
 }

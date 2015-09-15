@@ -19,7 +19,7 @@ Prensagem_Polpa::Prensagem_Polpa(const string& next)
     font->set_size(90);
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
-
+    
     Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
 
