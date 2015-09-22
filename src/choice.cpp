@@ -12,7 +12,8 @@
 #include <ijengine/core/font.h>
 #include <ijengine/core/image.h>
 #include <ijengine/core/environment.h>
-
+#include "question.h"
+#include <iostream>
 #include <ijengine/util/button.h>
 
 Choice::Choice(const string& next)
@@ -43,16 +44,14 @@ Choice::Choice(const string& next)
     font->set_style(Font::NORMAL);
     font->set_size(50);
 
-    Text *question = new Text(this, "Qual a forma de extração?", Color::BLACK);
-
-    if (question)
-    {
-        question->align_to(this, Object::CENTER, Object::NONE);
-        question->set_y(title->y() + title->h() + 50);
-    }
-
-    add_child(question);
+    Question *question = new Question("Qual a forma de extração?",title->y() + title->h() + 50,50,this);
+	question->start();
+	
+	question->setY(50);
+	/*Por que ta do tamanho da tela???*/
+    std::cerr << question->h() << "   " << question->w() << std::endl;
     
+    add_child(question);
     seedlings_amount = 5;
     
     Button *ext = new Button(this, "colheita", 330, 100);

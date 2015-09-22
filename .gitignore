@@ -1,5 +1,5 @@
-simulacao/bin
-simulacao/obj
+bin
+obj
 *.swp
 game
 *.cdr
