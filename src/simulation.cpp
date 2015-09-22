@@ -45,7 +45,7 @@
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("amendoa")
+    : Game("macauba")
 {
 }
 

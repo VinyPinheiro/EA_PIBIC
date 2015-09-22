@@ -19,39 +19,19 @@
 Choice::Choice(const string& next)
     : Level("choice", next)
 {
-    Environment *env = Environment::get_instance();
-    set_dimensions(env->canvas->w(), env->canvas->h());
-
-    shared_ptr<Font> font =
-        env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
-    font->set_size(90);
-    font->set_style(Font::BOLD);
-    env->canvas->set_font(font);
-
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
 
-    Text *title = new Text(this, "Escolha de Produção", Color::BLACK);
-
-    if (title)
-    {
-        title->align_to(this, Object::CENTER, Object::NONE);
-        title->set_y(40);
-    }
-
-    add_child(title);
-
-    font->set_style(Font::NORMAL);
-    font->set_size(50);
-
-    Question *question = new Question("Qual a forma de extração?",title->y() + title->h() + 50,50,this);
-	question->start();
-	
-	question->setY(50);
-	/*Por que ta do tamanho da tela???*/
-    std::cerr << question->h() << "   " << question->w() << std::endl;
-    
+   Question *question = new Question(this, "Escolha de Produção da Macaúba", "Qual a forma de extração?", "Extrativismo", "Plantio");
     add_child(question);
+
+/*
+//	question->start();
+	
+//	question->setY(50);
+ //   std::cerr << question->h() << "   " << question->w() << std::endl;
+    
+  //  add_child(question);
     seedlings_amount = 5;
     
     Button *ext = new Button(this, "colheita", 330, 100);
@@ -80,7 +60,7 @@ Choice::Choice(const string& next)
         plt->add_observer(this);
     }
 
-    add_child(plt);
+    add_child(plt); */
 }
 
 void
