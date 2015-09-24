@@ -5,6 +5,7 @@
 #include <ijengine/core/text.h>
 #include <ijengine/core/font.h>
 #include <ijengine/core/texture.h>
+#include <ijengine/util/button.h>
 
 #include <sstream>
 #include <iostream>
@@ -52,7 +53,35 @@ Question::Question(Object *parent, const string& title, const string& text,
 	m_text->align_to(this,Object::CENTER, Object::NONE);
 	m_text->set_y(y);
 	add_child(m_text);
-	y+= m_text->h() + space;
+	y += m_text->h() + space;
+
+	Button *btOk = new Button(this, "colheita", 330, 100);
+
+    if (btOk)
+    {
+        btOk->set_text(okButton, Color::BLACK);
+        btOk->set_color(Color(20, 180, 55, 128), Color(20, 55, 128, 128));
+        btOk->set_border(5, Color(0, 0, 0, 128));
+        btOk->align_to(this, Object::CENTER, Object::NONE);
+        btOk->set_y(y);
+		  btOk->add_observer(this);
+    }
+	 y += btOk->h() + space;
+    add_child(btOk);
+
+    Button *btCancel = new Button(this, "solo", 200, 100);
+
+    if (btCancel)
+    {
+        btCancel->set_text(cancelButton, Color::BLACK);
+        btCancel->set_color(Color(20, 180, 55, 128), Color(20, 55, 128, 128));
+        btCancel->set_border(5, Color(0, 0, 0, 128));
+        btCancel->align_to(this, Object::CENTER, Object::NONE);
+        btCancel->set_y(y);
+        btCancel->add_observer(this);
+    }
+
+    add_child(btCancel);
 
 }
 
