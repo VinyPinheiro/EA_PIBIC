@@ -16,14 +16,14 @@ Question::Question(Object *parent, const string& title, const string& text,
     : Object(parent, "question"), m_waiting(true), m_answer(UNKNOWN)
 {
     const double posy = 40;
-    const double size = 80;
+    const double size[] = {80,40};
 
 	Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
 
     shared_ptr<Font> font =
         env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
-    font->set_size(size);
+    font->set_size(size[0]);
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
 
@@ -44,6 +44,16 @@ Question::Question(Object *parent, const string& title, const string& text,
             y += m_title->h() + space;
         }
    }
+	
+	font->set_style(Font::NORMAL);
+	font->set_size(size[1]);
+
+	Text *m_text = new Text(this, text, Color::BLACK);
+	m_text->align_to(this,Object::CENTER, Object::NONE);
+	m_text->set_y(y);
+	add_child(m_text);
+	y+= m_text->h() + space;
+
 }
 
 void
