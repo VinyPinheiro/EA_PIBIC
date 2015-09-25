@@ -6,6 +6,7 @@
 #include <ijengine/core/font.h>
 #include <ijengine/core/texture.h>
 #include <ijengine/util/button.h>
+#include <ijengine/core/level.h>
 
 #include <sstream>
 #include <iostream>
@@ -13,8 +14,9 @@
 using namespace std;
 
 Question::Question(Object *parent, const string& title, const string& text,
-    const string& okButton, const string& cancelButton)
-    : Object(parent, "question"), m_waiting(true), m_answer(UNKNOWN)
+    const string& okButton, const string& cancelButton, const string& okID, const string& cancelID)
+    : Level(parent->id(), "question"), m_waiting(true), m_answer(UNKNOWN)
+	
 {
     const double posy = 40;
     const double size[] = {80,40};
@@ -55,7 +57,7 @@ Question::Question(Object *parent, const string& title, const string& text,
 	add_child(m_text);
 	y += m_text->h() + space;
 
-	Button *btOk = new Button(this, "colheita", 330, 100);
+	Button *btOk = new Button(this, okID, 330, 100);
 
     if (btOk)
     {
@@ -69,7 +71,7 @@ Question::Question(Object *parent, const string& title, const string& text,
 	 y += btOk->h() + space;
     add_child(btOk);
 
-    Button *btCancel = new Button(this, "solo", 200, 100);
+    Button *btCancel = new Button(this, cancelID, 300, 100);
 
     if (btCancel)
     {
@@ -148,4 +150,22 @@ Question::split(const string& text) const
     }
 
     return lines;
-}    
+}
+
+bool
+Question::on_message(Object *object, MessageID id, Parameters)
+{
+    if (id != Button::clickedID)
+    {
+        return false;
+    }
+    id_button_click = object->id();
+	this->finish();
+    return true;
+}
+
+ObjectID
+Question::next()
+{
+	return id_button_click;
+}
