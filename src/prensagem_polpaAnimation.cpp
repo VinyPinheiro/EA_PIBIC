@@ -26,20 +26,14 @@ Prensagem_PolpaAnimation::Prensagem_PolpaAnimation(const string& next)
 	Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
 	
-    add_component(GEAR, 110, 490);
-	add_component(CANO, 240, 550, Cano::RETO1);
-	add_component(CANO, 320, 550, Cano::RETO1);
-	add_component(CANO, 400, 550, Cano::RETO1);
-	add_component(CANO, 480, 550, Cano::RETO1);
-	add_component(CANO, 560, 550, Cano::RETO1);
-	add_component(CANO, 640, 550, Cano::RETO1);
-	add_component(CANO, 720, 550, Cano::RETO1);
-	add_component(CANO, 800, 550, Cano::RETO1);
-	add_component(CANO, 880, 530, Cano::T);
-	add_component(CANO, 920, 610, Cano::RETO3);
-
-    //m_connections[1].push_back((int) m_components.size());
-
+    add_component(GEAR, 390, 170);
+	add_component(CANO, 520, 180, Cano::CURVO6);
+	add_component(CANO, 560, 100, Cano::RETO4);
+	add_component(CANO, 560, 20, Cano::CURVO4);
+	add_component(CANO, 640, 20, Cano::RETO1);
+	add_component(CANO, 720, 20, Cano::RETO1);
+	add_component(CANO, 800, 20, Cano::CURVO1);
+	
     m_connections.back().clear();
     m_active.push_back(0);
     m_components[0]->start();

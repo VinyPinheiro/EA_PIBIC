@@ -32,20 +32,16 @@ DespolpamentoAnimation::DespolpamentoAnimation(const string& next)
 	add_component(CANO, 200, 230, Cano::CURVO2);
 	add_component(CANO, 120, 270, Cano::RETO2);
 	add_component(CANO, 40, 270, Cano::CURVO8);
-	add_component(CANO, 40, 350, Cano::RETO3);
-	add_component(CANO, 40, 430, Cano::RETO3);
-	add_component(CANO, 40, 510, Cano::CURVO7);
+	add_component(CANO, 40, 350, Cano::CURVO7);
+	add_component(CANO, 120, 390, Cano::CURVO1);
+	add_component(CANO, 160, 470, Cano::CURVO7);
 
     m_connections[1].push_back((int) m_components.size());
 
 	add_component(CANO, 200, 100, Cano::RETO1);
 	add_component(CANO, 280, 100, Cano::CURVO1);
-	add_component(CANO, 320, 180, Cano::RETO3);
-	add_component(CANO, 280, 260, Cano::CURVO2);
-	add_component(CANO, 200, 300, Cano::CURVO8);
-	add_component(CANO, 200, 380, Cano::CURVO7);
-	add_component(CANO, 280, 420, Cano::RETO1);
-
+	add_component(CANO, 320, 180, Cano::CURVO7);
+	
     m_connections.back().clear();
     m_active.push_back(0);
     m_components[0]->start();

@@ -1,4 +1,4 @@
-#include "fragmentacaoAnimation.h"
+#include "lavagemAnimation.h"
 #include "global.h"
 #include "cano.h"
 #include "gear.h"
@@ -11,8 +11,8 @@
 #include <ijengine/core/environment.h>
 
 
-FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
-    : Level("fragmentacao", next)
+LavagemAnimation::LavagemAnimation(const string& next)
+    : Level("lavagem", next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
@@ -23,13 +23,21 @@ FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
 
-    Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
+    Image *image = new Image(this, "res/images/background_despolpa_fase2.png");
     add_child(image);
     
-    add_component(GEAR, 230, 420);
-	add_component(CANO, 360, 450, Cano::CURVO1);
-	add_component(CANO, 400, 530, Cano::CURVO7);
-	add_component(CANO, 480, 570, Cano::RETO1);
+    add_component(GEAR, 310, 250);
+	add_component(CANO, 440, 290, Cano::CURVO6);
+	add_component(CANO, 440, 210, Cano::CURVO5);
+	add_component(CANO, 360, 210, Cano::RETO2);
+	add_component(CANO, 280, 210, Cano::RETO2);
+	add_component(CANO, 200, 170, Cano::CURVO3);
+	add_component(CANO, 200, 90, Cano::CURVO4);
+	add_component(CANO, 280, 90, Cano::RETO1);
+	add_component(CANO, 360, 90, Cano::RETO1);
+	add_component(CANO, 440, 90, Cano::RETO1);
+	add_component(CANO, 520, 90, Cano::RETO1);
+	add_component(CANO, 600, 90, Cano::RETO1);
 	
     m_connections.back().clear();
     m_active.push_back(0);
@@ -38,7 +46,7 @@ FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
 
 
 void
-FragmentacaoAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
+LavagemAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
 {
     switch (type) {
     case CANO:
@@ -65,14 +73,14 @@ FragmentacaoAnimation::add_component(Type type, double x, double y, Cano::Tipo p
 }
 
 void
-FragmentacaoAnimation::draw_self()
+LavagemAnimation::draw_self()
 {
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
 }
 
 void
-FragmentacaoAnimation::update_self(unsigned long elapsed)
+LavagemAnimation::update_self(unsigned long elapsed)
 {
     auto active = m_active;
 

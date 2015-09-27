@@ -39,13 +39,21 @@
 #include "trituracaoAnimation.h"
 #include "aglutinagem.h"
 #include "aglutinagemAnimation.h"
+#include "lavagem.h"
+#include "lavagemAnimation.h"
+#include "compactacao.h"
+#include "compactacaoAnimation.h"
+#include "aquecimento.h"
+#include "aquecimentoAnimation.h"
+#include "tratamento_termico.h"
+#include "tratamento_termicoAnimation.h"
 
 //#include "filter.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("macauba")
+    : Game("aquecimento")
 {
 }
 
@@ -180,8 +188,40 @@ Simulation::load_level(const string& id)
 	}
 	else if(id == "aglutinagemAnimation")
     {
-		return new AglutinagemAnimation();
+		return new AglutinagemAnimation("lavagem");
 	}
-
+	else if(id == "lavagem")
+    {
+		return new Lavagem();
+	}
+	else if(id == "lavagemAnimation")
+    {
+		return new LavagemAnimation("compactacao");
+	}
+	else if(id == "compactacao")
+    {
+		return new Compactacao();
+	}
+	else if(id == "compactacaoAnimation")
+    {
+		return new CompactacaoAnimation("aquecimento");
+	}
+	else if(id == "aquecimento")
+    {
+		return new Aquecimento();
+	}
+	else if(id == "aquecimentoAnimation")
+    {
+		return new AquecimentoAnimation("tratamento_termico");
+	}
+	else if(id == "tratamento_termico")
+    {
+		return new Tratamento_termico();
+	}
+	else if(id == "tratamento_termicoAnimation")
+    {
+		return new Tratamento_termicoAnimation();
+	}
+	
     return nullptr;
 }

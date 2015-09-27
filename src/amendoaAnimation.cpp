@@ -26,11 +26,13 @@ AmendoaAnimation::AmendoaAnimation(const string& next)
     Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
     
-    add_component(GEAR, 670, 300);
-	add_component(CANO, 800, 370, Cano::RETO1);
-	add_component(CANO, 880, 370, Cano::CURVO1);
-	add_component(CANO, 920, 450, Cano::RETO3);
-	add_component(CANO, 920, 610, Cano::RETO3);
+    add_component(GEAR, 670, 140);
+	add_component(CANO, 800, 180, Cano::CURVO6);
+	add_component(CANO, 840, 100, Cano::T);
+	add_component(CANO, 920, 80, Cano::CURVO6);
+	add_component(CANO, 960, 0, Cano::CURVO4);
+	add_component(CANO, 1040, 0, Cano::RETO1);
+	add_component(CANO, 1120, 0, Cano::RETO1);
 	
     m_connections.back().clear();
     m_active.push_back(0);

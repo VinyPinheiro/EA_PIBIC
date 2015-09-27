@@ -26,11 +26,9 @@ TrituracaoAnimation::TrituracaoAnimation(const string& next)
     Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
     
-    add_component(GEAR, 870, 140);
-	add_component(CANO, 1000, 230, Cano::CURVO1);
-	add_component(CANO, 1040, 310, Cano::RETO3);
-	add_component(CANO, 1040, 390, Cano::CURVO7);
-	add_component(CANO, 1120, 430, Cano::RETO1);
+    add_component(GEAR, 950, 280);
+	add_component(CANO, 1080, 310, Cano::CURVO1);
+	add_component(CANO, 1120, 390, Cano::CURVO7);
 	
     m_connections.back().clear();
     m_active.push_back(0);
