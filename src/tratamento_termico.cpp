@@ -36,7 +36,7 @@ Tratamento_termico::Tratamento_termico(const string& next)
     font->set_style(Font::NORMAL);
     font->set_size(50);
 
-    Text *question = new Text(this, "Fazer tratamento termico", Color::BLACK);
+    Text *question = new Text(this, "Fazer tratamento térmico", Color::BLACK);
 
     if (question)
     {

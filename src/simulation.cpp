@@ -47,13 +47,18 @@
 #include "aquecimentoAnimation.h"
 #include "tratamento_termico.h"
 #include "tratamento_termicoAnimation.h"
+#include "biocombustiveisAnimation.h"
+#include "biocombustiveis.h"
+#include "biodieselAnimation.h"
+#include "bioqueroseneAnimation.h"
+#include "biooleoAnimation.h"
 
 //#include "filter.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("aquecimento")
+    : Game("biocombustiveis")
 {
 }
 
@@ -220,7 +225,27 @@ Simulation::load_level(const string& id)
 	}
 	else if(id == "tratamento_termicoAnimation")
     {
-		return new Tratamento_termicoAnimation();
+		return new Tratamento_termicoAnimation("biocombustiveisAnimation");
+	}
+	else if(id == "biocombustiveisAnimation")
+    {
+		return new BiocombustiveisAnimation("biocombustiveis");
+	}
+	else if(id == "biocombustiveis")
+    {
+		return new Biocombustiveis();
+	}
+	else if(id == "biodieselAnimation")
+    {
+		return new BiodieselAnimation();
+	}
+	else if(id == "bioqueroseneAnimation")
+    {
+		return new BioqueroseneAnimation();
+	}
+	else if(id == "biooleoAnimation")
+    {
+		return new BiooleoAnimation();
 	}
 	
     return nullptr;
