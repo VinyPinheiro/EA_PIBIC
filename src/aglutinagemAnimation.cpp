@@ -34,6 +34,26 @@ AglutinagemAnimation::AglutinagemAnimation(const string& next)
 	add_component(CANO, 160, 430, Cano::RETO2);
 	add_component(CANO, 80, 390, Cano::CURVO3);
 	add_component(CANO, 80, 310, Cano::CURVO4);
+	add_component(CANO, 160, 310, Cano::RETO1);
+	add_component(CANO, 240, 310, Cano::RETO1);
+	
+	m_connections[1].push_back((int) m_components.size());
+	
+	add_component(CANO, 0, 0, Cano::RETO1);
+	add_component(CANO, 80, 0, Cano::RETO1);
+	add_component(CANO, 160, 0, Cano::RETO1);
+	add_component(CANO, 240, 0, Cano::RETO1);
+	add_component(CANO, 320, 0, Cano::RETO1);
+	add_component(CANO, 400, 0, Cano::RETO1);
+	add_component(CANO, 480, 0, Cano::RETO1);
+	add_component(CANO, 560, 0, Cano::RETO1);
+	add_component(CANO, 640, 0, Cano::RETO1);
+	add_component(CANO, 720, 0, Cano::RETO1);
+	add_component(CANO, 800, 0, Cano::RETO1);
+	add_component(CANO, 880, 0, Cano::RETO1);
+	add_component(CANO, 960, 0, Cano::RETO1);
+	add_component(CANO, 1040, 0, Cano::RETO1);
+	add_component(CANO, 1120, 0, Cano::RETO1);
 	
     m_connections.back().clear();
     m_active.push_back(0);

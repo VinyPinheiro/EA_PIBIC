@@ -26,17 +26,20 @@ SeparacaoAnimation::SeparacaoAnimation(const string& next)
     Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
     add_child(image);
     
-    add_component(GEAR, 550, 40);
-	add_component(CANO, 680, 80, Cano::RETO1);
-	add_component(CANO, 760, 80, Cano::CURVO1);
-	add_component(CANO, 800, 160, Cano::CURVO7);
+    add_component(GEAR, 550, 480);
+	add_component(CANO, 680, 475, Cano::CURVO6);
+	add_component(CANO, 680, 395, Cano::CURVO5);
+	add_component(CANO, 600, 355, Cano::CURVO3);
+	add_component(CANO, 600, 275, Cano::RETO4);
+	add_component(CANO, 600, 195, Cano::CURVO4);
 	
     m_connections[1].push_back((int) m_components.size());
 
-	add_component(CANO, 680, 130, Cano::CURVO1);
-	add_component(CANO, 680, 210, Cano::CURVO2);
-	add_component(CANO, 600, 250, Cano::CURVO8);
-	add_component(CANO, 600, 330, Cano::CURVO7);
+	add_component(CANO, 680, 565, Cano::RETO1);
+	add_component(CANO, 760, 565, Cano::RETO1);
+	add_component(CANO, 840, 525, Cano::CURVO6);
+	add_component(CANO, 880, 445, Cano::RETO4);
+	add_component(CANO, 880, 365, Cano::CURVO4);
 	
     m_connections.back().clear();
     m_active.push_back(0);

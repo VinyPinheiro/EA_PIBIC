@@ -1,35 +1,43 @@
-#include "fragmentacaoAnimation.h"
+#include "biodieselAnimation.h"
 #include "global.h"
 #include "cano.h"
 #include "gear.h"
 #include <vector>
 
-#include <ijengine/core/text.h>
+//#include <ijengine/core/text.h>
 #include <ijengine/core/animation.h>
-#include <ijengine/core/font.h>
+//#include <ijengine/core/font.h>
 #include <ijengine/core/image.h>
 #include <ijengine/core/environment.h>
 
 
-FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
-    : Level("fragmentacao", next)
+BiodieselAnimation::BiodieselAnimation(const string& next)
+    : Level("biocombustiveis", next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
 
-    shared_ptr<Font> font =
+   /* shared_ptr<Font> font =
         env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
     font->set_size(90);
     font->set_style(Font::BOLD);
-    env->canvas->set_font(font);
+    env->canvas->set_font(font);*/
 
-    Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
+    Image *image = new Image(this, "res/images/background_biocombustiveis.png");
     add_child(image);
     
-    add_component(GEAR, 230, 420);
-	add_component(CANO, 360, 450, Cano::CURVO1);
-	add_component(CANO, 400, 530, Cano::CURVO7);
-	add_component(CANO, 480, 570, Cano::RETO1);
+    add_component(CANO, 400, 290, Cano::RETO4);
+    add_component(CANO, 400, 210, Cano::RETO4);
+    add_component(CANO, 400, 130, Cano::CURVO4);
+	add_component(CANO, 480, 130, Cano::RETO1);
+    add_component(CANO, 560, 130, Cano::RETO1);
+    add_component(CANO, 640, 130, Cano::RETO1);
+    add_component(CANO, 720, 130, Cano::RETO1);
+    add_component(CANO, 800, 130, Cano::RETO1);
+    add_component(CANO, 880, 130, Cano::RETO1);
+    add_component(CANO, 960, 130, Cano::RETO1);
+    add_component(CANO, 1040, 130, Cano::RETO1);
+    add_component(CANO, 1120, 130, Cano::RETO1);
 	
     m_connections.back().clear();
     m_active.push_back(0);
@@ -38,7 +46,7 @@ FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
 
 
 void
-FragmentacaoAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
+BiodieselAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
 {
     switch (type) {
     case CANO:
@@ -65,14 +73,14 @@ FragmentacaoAnimation::add_component(Type type, double x, double y, Cano::Tipo p
 }
 
 void
-FragmentacaoAnimation::draw_self()
+BiodieselAnimation::draw_self()
 {
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
 }
 
 void
-FragmentacaoAnimation::update_self(unsigned long elapsed)
+BiodieselAnimation::update_self(unsigned long elapsed)
 {
     auto active = m_active;
 

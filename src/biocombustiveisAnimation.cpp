@@ -1,4 +1,4 @@
-#include "fragmentacaoAnimation.h"
+#include "biocombustiveisAnimation.h"
 #include "global.h"
 #include "cano.h"
 #include "gear.h"
@@ -11,8 +11,8 @@
 #include <ijengine/core/environment.h>
 
 
-FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
-    : Level("fragmentacao", next)
+BiocombustiveisAnimation::BiocombustiveisAnimation(const string& next)
+    : Level("tratamento_termicoAnimation", next)
 {
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
@@ -23,13 +23,18 @@ FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
 
-    Image *image = new Image(this, "res/images/background_despolpa_fase1.png");
+    Image *image = new Image(this, "res/images/background_biocombustiveis.png");
     add_child(image);
     
-    add_component(GEAR, 230, 420);
-	add_component(CANO, 360, 450, Cano::CURVO1);
-	add_component(CANO, 400, 530, Cano::CURVO7);
-	add_component(CANO, 480, 570, Cano::RETO1);
+    add_component(CANO, 0, 0, Cano::RETO1);
+	add_component(CANO, 80, 0, Cano::CURVO1);
+	add_component(CANO, 120, 80, Cano::RETO3);
+	add_component(CANO, 120, 160, Cano::RETO3);
+	add_component(CANO, 120, 240, Cano::RETO3);
+	add_component(CANO, 120, 320, Cano::CURVO7);
+	add_component(CANO, 200, 360, Cano::RETO1);
+	add_component(CANO, 280, 360, Cano::RETO1);
+	add_component(CANO, 360, 360, Cano::RETO1);
 	
     m_connections.back().clear();
     m_active.push_back(0);
@@ -38,7 +43,7 @@ FragmentacaoAnimation::FragmentacaoAnimation(const string& next)
 
 
 void
-FragmentacaoAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
+BiocombustiveisAnimation::add_component(Type type, double x, double y, Cano::Tipo p)
 {
     switch (type) {
     case CANO:
@@ -65,14 +70,14 @@ FragmentacaoAnimation::add_component(Type type, double x, double y, Cano::Tipo p
 }
 
 void
-FragmentacaoAnimation::draw_self()
+BiocombustiveisAnimation::draw_self()
 {
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
 }
 
 void
-FragmentacaoAnimation::update_self(unsigned long elapsed)
+BiocombustiveisAnimation::update_self(unsigned long elapsed)
 {
     auto active = m_active;
 

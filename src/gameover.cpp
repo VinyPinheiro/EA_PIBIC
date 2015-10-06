@@ -27,14 +27,15 @@ GameOver::GameOver(const string& next)
     font->set_style(Font::BOLD);
     env->canvas->set_font(font);
 
-    Image *image = new Image(this, "res/images/background.png");
+    Image *image = new Image(this, "res/images/background_gameover.png");
     add_child(image);
 
     Text *title = new Text(this, "GameOver", Color::BLACK);
 
     if (title)
     {
-        title->align_to(this, Object::CENTER, Object::MIDDLE);
+        title->align_to(this, Object::CENTER, Object::NONE);
+        title->set_y(30);
     }
 
     add_child(title);

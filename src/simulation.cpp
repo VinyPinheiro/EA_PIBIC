@@ -39,13 +39,26 @@
 #include "trituracaoAnimation.h"
 #include "aglutinagem.h"
 #include "aglutinagemAnimation.h"
+#include "lavagem.h"
+#include "lavagemAnimation.h"
+#include "compactacao.h"
+#include "compactacaoAnimation.h"
+#include "aquecimento.h"
+#include "aquecimentoAnimation.h"
+#include "tratamento_termico.h"
+#include "tratamento_termicoAnimation.h"
+#include "biocombustiveisAnimation.h"
+#include "biocombustiveis.h"
+#include "biodieselAnimation.h"
+#include "bioqueroseneAnimation.h"
+#include "biooleoAnimation.h"
 
 //#include "filter.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("macauba")
+    : Game("biocombustiveis")
 {
 }
 
@@ -180,8 +193,60 @@ Simulation::load_level(const string& id)
 	}
 	else if(id == "aglutinagemAnimation")
     {
-		return new AglutinagemAnimation();
+		return new AglutinagemAnimation("lavagem");
 	}
-
+	else if(id == "lavagem")
+    {
+		return new Lavagem();
+	}
+	else if(id == "lavagemAnimation")
+    {
+		return new LavagemAnimation("compactacao");
+	}
+	else if(id == "compactacao")
+    {
+		return new Compactacao();
+	}
+	else if(id == "compactacaoAnimation")
+    {
+		return new CompactacaoAnimation("aquecimento");
+	}
+	else if(id == "aquecimento")
+    {
+		return new Aquecimento();
+	}
+	else if(id == "aquecimentoAnimation")
+    {
+		return new AquecimentoAnimation("tratamento_termico");
+	}
+	else if(id == "tratamento_termico")
+    {
+		return new Tratamento_termico();
+	}
+	else if(id == "tratamento_termicoAnimation")
+    {
+		return new Tratamento_termicoAnimation("biocombustiveisAnimation");
+	}
+	else if(id == "biocombustiveisAnimation")
+    {
+		return new BiocombustiveisAnimation("biocombustiveis");
+	}
+	else if(id == "biocombustiveis")
+    {
+		return new Biocombustiveis();
+	}
+	else if(id == "biodieselAnimation")
+    {
+		return new BiodieselAnimation();
+	}
+	else if(id == "bioqueroseneAnimation")
+    {
+		return new BioqueroseneAnimation();
+	}
+	else if(id == "biooleoAnimation")
+    {
+		return new BiooleoAnimation();
+	}
+	
     return nullptr;
 }
