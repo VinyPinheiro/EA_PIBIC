@@ -14,7 +14,7 @@
 using namespace std;
 
 Question::Question(Object *parent, const string& title, const string& text,
-    const string& okButton, const string& cancelButton, const string& okID, const string& cancelID)
+    const vector<string>& buttons, const vector<string>& ids)
     : Level(parent->id(), "question"), m_waiting(true), m_answer(UNKNOWN)
 	
 {
@@ -57,34 +57,22 @@ Question::Question(Object *parent, const string& title, const string& text,
 	add_child(m_text);
 	y += m_text->h() + space;
 
-	Button *btOk = new Button(this, okID, 330, 100);
+	for(unsigned int i = 0; i < buttons.size(); i++)
+	{
+		Button *bt = new Button(this, ids[i], 330, 100);
 
-    if (btOk)
-    {
-        btOk->set_text(okButton, Color::BLACK);
-        btOk->set_color(Color(20, 180, 55, 128), Color(20, 55, 128, 128));
-        btOk->set_border(5, Color(0, 0, 0, 128));
-        btOk->align_to(this, Object::CENTER, Object::NONE);
-        btOk->set_y(y);
-		  btOk->add_observer(this);
-    }
-	 y += btOk->h() + space;
-    add_child(btOk);
-
-    Button *btCancel = new Button(this, cancelID, 300, 100);
-
-    if (btCancel)
-    {
-        btCancel->set_text(cancelButton, Color::BLACK);
-        btCancel->set_color(Color(20, 180, 55, 128), Color(20, 55, 128, 128));
-        btCancel->set_border(5, Color(0, 0, 0, 128));
-        btCancel->align_to(this, Object::CENTER, Object::NONE);
-        btCancel->set_y(y);
-        btCancel->add_observer(this);
-    }
-
-    add_child(btCancel);
-
+    	if (bt)
+    	{
+    	    bt->set_text(buttons[i], Color::BLACK);
+    	    bt->set_color(Color(20, 180, 55, 128), Color(20, 55, 128, 128));
+    	    bt->set_border(5, Color(0, 0, 0, 128));
+    	    bt->align_to(this, Object::CENTER, Object::NONE);
+    	    bt->set_y(y);
+		  	bt->add_observer(this);
+    	}
+		y += bt->h() + space;
+    	add_child(bt);
+	}
 }
 
 void
