@@ -15,7 +15,7 @@ class Question : public Level
 {
 public:
 	Question(Object *parent, const string& title, const string& text,
-        const vector<string>& buttons, const vector<string>& ids);
+        const vector<pair<string, string> >& buttons);
 
     typedef enum { YES, NO, UNKNOWN } Answer;
 
