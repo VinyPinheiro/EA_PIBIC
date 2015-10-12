@@ -14,7 +14,7 @@
 using namespace std;
 
 Question::Question(Object *parent, const string& title, const string& text,
-    const vector<string>& buttons, const vector<string>& ids)
+    const vector<pair<string, string> >& buttons)
     : Level(parent->id(), "question"), m_waiting(true), m_answer(UNKNOWN)
 	
 {
@@ -59,11 +59,11 @@ Question::Question(Object *parent, const string& title, const string& text,
 
 	for(unsigned int i = 0; i < buttons.size(); i++)
 	{
-		Button *bt = new Button(this, ids[i], 330, 100);
+		Button *bt = new Button(this, buttons[i].second, 330, 100);
 
     	if (bt)
     	{
-    	    bt->set_text(buttons[i], Color::BLACK);
+    	    bt->set_text(buttons[i].first, Color::BLACK);
     	    bt->set_color(Color(20, 180, 55, 128), Color(20, 55, 128, 128));
     	    bt->set_border(5, Color(0, 0, 0, 128));
     	    bt->align_to(this, Object::CENTER, Object::NONE);

@@ -20,9 +20,14 @@ Choice::Choice(const string& next)
 {
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
+	
+	vector<pair<string, string> > button;
 
+	button.emplace_back("Extrativismo","colheita");
+	button.emplace_back("Plantio","solo");
+	
     question = new Question(this, "Escolha de Produção da Macaúba", "Qual a forma de extração?"
-		, "Extrativismo", "Plantio","colheita","solo");
+		, button);
     add_child(question);
 }
 
