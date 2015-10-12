@@ -39,7 +39,7 @@ Choice::draw_self()
 }
 
 void
-Choice::update_self(unsigned long x)
+Choice::update_self(unsigned long)
 {
 	if(question->finished())
 	{

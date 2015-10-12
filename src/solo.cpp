@@ -28,57 +28,16 @@ Solo::Solo(const string& next)
 
     Image *image = new Image(this, "res/images/background.png");
     add_child(image);
+    
+    vector<pair<string, string> > button;
 
-    Text *title = new Text(this, "Preparando Solo", Color::BLACK);
-
-    if (title)
-    {
-        title->align_to(this, Object::CENTER, Object::NONE);
-        title->set_y(40);
-    }
-
-    add_child(title);
-
-    font->set_style(Font::NORMAL);
-    font->set_size(50);
-
-    Text *question = new Text(this, "Colocar fertilizantes e calcário?", Color::BLACK);
-
-    if (question)
-    {
-        question->align_to(this, Object::CENTER, Object::NONE);
-        question->set_y(title->y() + title->h() + 50);
-    }
-
+	button.emplace_back("Sim","trator");
+	button.emplace_back("Não","gameover");
+	
+    question = new Question(this, "Preparando Solo", "Colocar fertilizantes e calcário?"
+		, button);
     add_child(question);
 
-    Button *yes = new Button(this, "trator", 200, 100);
-
-    if (yes)
-    {
-        yes->set_text("Sim", Color::BLACK);
-        yes->set_color(Color(20, 180, 55, 128), Color(20, 55, 128, 128));
-        yes->set_border(5, Color(0, 0, 0, 128));
-        yes->align_to(this, Object::CENTER, Object::NONE);
-        yes->set_y(question->y() + question->h() + 40);
-        yes->add_observer(this);
-    }
-
-    add_child(yes);
-
-    Button *no = new Button(this, "gameover", 200, 100);
-
-    if (no)
-    {
-        no->set_text("Não", Color::BLACK);
-        no->set_color(Color(20, 180, 55, 128), Color(20, 55, 128, 128));
-        no->set_border(5, Color(0, 0, 0, 128));
-        no->align_to(this, Object::CENTER, Object::NONE);
-        no->set_y(yes->y() + yes->h() + 20);
-        no->add_observer(this);
-    }
-
-    add_child(no);
 }
 
 void
@@ -88,16 +47,12 @@ Solo::draw_self()
     env->canvas->clear(Color::WHITE);
 }
 
-bool
-Solo::on_message(Object *object, MessageID id, Parameters)
+void
+Solo::update_self(unsigned long)
 {
-    if (id != Button::clickedID)
-    {
-        return false;
-    }
-
-    set_next(object->id());
-    finish();
-
-    return true;
+	if(question->finished())
+	{
+		this->set_next(question->next());
+		this->finish();
+	}
 }

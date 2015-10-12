@@ -60,7 +60,7 @@ Colheita::draw_self()
 }
 
 void
-Colheita::update_self(unsigned long x)
+Colheita::update_self(unsigned long)
 {
 	if(question->finished())
 	{
