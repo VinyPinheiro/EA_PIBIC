@@ -4,9 +4,7 @@
 #include "gear.h"
 #include <vector>
 
-//#include <ijengine/core/text.h>
 #include <ijengine/core/animation.h>
-//#include <ijengine/core/font.h>
 #include <ijengine/core/image.h>
 #include <ijengine/core/environment.h>
 

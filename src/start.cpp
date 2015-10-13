@@ -35,7 +35,7 @@ Start::Start()
     if (title)
     {
         title->align_to(this, Object::CENTER, Object::NONE);
-        title->set_y(60);
+        title->set_y(20);
     }
 
     add_child(title);
@@ -46,7 +46,7 @@ Start::Start()
 
     if (macauba)
     {
-        macauba->set_text("Macauba", Color::WHITE);
+        macauba->set_text("Macaúba", Color::WHITE);
         macauba->set_color(Color(0, 0, 0, 128), Color(64, 64, 64, 128));
         macauba->set_border(1, Color(128, 128, 128, 128));
         macauba->align_to(this, Object::CENTER, Object::NONE);

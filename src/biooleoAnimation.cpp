@@ -4,9 +4,7 @@
 #include "gear.h"
 #include <vector>
 
-#include <ijengine/core/text.h>
 #include <ijengine/core/animation.h>
-#include <ijengine/core/font.h>
 #include <ijengine/core/image.h>
 #include <ijengine/core/environment.h>
 
@@ -17,18 +15,12 @@ BiooleoAnimation::BiooleoAnimation(const string& next)
     Environment *env = Environment::get_instance();
     set_dimensions(env->canvas->w(), env->canvas->h());
 
-    shared_ptr<Font> font =
-        env->resources_manager->get_font("res/fonts/AjarSans-Regular.ttf");
-    font->set_size(90);
-    font->set_style(Font::BOLD);
-    env->canvas->set_font(font);
-
     Image *image = new Image(this, "res/images/background_biocombustiveis.png");
     add_child(image);
     
-    add_component(CANO, 400, 370, Cano::RETO4);
-    add_component(CANO, 400, 450, Cano::RETO4);
-    add_component(CANO, 400, 530, Cano::CURVO4);
+    add_component(CANO, 400, 370, Cano::RETO3);
+    add_component(CANO, 400, 450, Cano::RETO3);
+    add_component(CANO, 400, 530, Cano::CURVO7);
 	add_component(CANO, 480, 570, Cano::RETO1);
     add_component(CANO, 560, 570, Cano::RETO1);
     add_component(CANO, 640, 570, Cano::RETO1);

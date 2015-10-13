@@ -50,15 +50,40 @@
 #include "biocombustiveisAnimation.h"
 #include "biocombustiveis.h"
 #include "biodieselAnimation.h"
+#include "biodiesel_prelimpeza.h"
+#include "biodiesel_prelimpezaAnimation.h"
 #include "bioqueroseneAnimation.h"
+#include "bioquerosene_transesterificacao.h"
+#include "bioquerosene_transesterificacaoAnimation.h"
+#include "bioquerosene_separacao_fase.h"
+#include "bioquerosene_separacao_faseAnimation.h"
+#include "bioquerosene_descarbonilacao.h"
+#include "bioquerosene_descarbonilacaoAnimation.h"
+#include "bioquerosene_separacao.h"
+#include "bioquerosene_separacaoAnimation.h"
+#include "bioquerosene_hidrogenacao.h"
+#include "bioquerosene_hidrogenacaoAnimation.h"
 #include "biooleoAnimation.h"
+#include "biooleo_pressurizacao.h"
+#include "biooleo_pressurizacaoAnimation.h"
+#include "biooleo_desoxigenacao.h"
+#include "biooleo_desoxigenacaoAnimation.h"
+#include "biooleo_reacao_diesel.h"
+#include "biooleo_reacao_dieselAnimation.h"
+#include "biooleo_isomeros.h"
+#include "biooleo_isomerosAnimation.h"
+#include "biooleo_destilacao.h"
+#include "biooleo_destilacaoAnimation.h"
+
+#include "finalizacao.h"
+#include "winner.h"
 
 //#include "filter.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("biocombustiveis")
+    : Game("biodieselAnimation")
 {
 }
 
@@ -132,10 +157,14 @@ Simulation::load_level(const string& id)
 	} else if (id == "full_truck")
     {
         return new Full_truck("delivery");
-	} else if (id == "delivery")
+	}
+	else if (id == "delivery")
     {
         return new Delivery("industry");
-	} else if (id == "industry")
+	}
+	///DESPOLPA
+	///------------------------------------------------------------------------------
+	else if (id == "industry")
     {
         return new Industry("despolpamento");
 	}
@@ -235,17 +264,120 @@ Simulation::load_level(const string& id)
     {
 		return new Biocombustiveis();
 	}
+	///BIOQUEROSENE
+	///------------------------------------------------------------------------------
 	else if(id == "biodieselAnimation")
     {
-		return new BiodieselAnimation();
+		return new BiodieselAnimation("biodiesel_prelimpeza");
 	}
+	else if(id == "biodiesel_prelimpeza")
+    {
+		return new Biodiesel_prelimpeza();
+	}
+	else if(id == "biodiesel_prelimpezaAnimation")
+    {
+		return new Biodiesel_prelimpezaAnimation();
+	}
+	///BIOQUEROSENE
+	///------------------------------------------------------------------------------
 	else if(id == "bioqueroseneAnimation")
     {
-		return new BioqueroseneAnimation();
+		return new BioqueroseneAnimation("bioquerosene_transesterificacao");
 	}
+	else if(id == "bioquerosene_transesterificacao")
+    {
+		return new Bioquerosene_transesterificacao();
+	}
+	else if(id == "bioquerosene_transesterificacaoAnimation")
+    {
+		return new Bioquerosene_transesterificacaoAnimation("bioquerosene_separacao_fase");
+	}
+	else if(id == "bioquerosene_separacao_fase")
+    {
+		return new Bioquerosene_separacao_fase();
+	}
+	else if(id == "bioquerosene_separacao_faseAnimation")
+    {
+		return new Bioquerosene_separacao_faseAnimation("bioquerosene_descarbonilacao");
+	}
+	else if(id == "bioquerosene_descarbonilacao")
+    {
+		return new Bioquerosene_descarbonilacao();
+	}
+	else if(id == "bioquerosene_descarbonilacaoAnimation")
+    {
+		return new Bioquerosene_descarbonilacaoAnimation("bioquerosene_separacao");
+	}
+	else if(id == "bioquerosene_separacao")
+    {
+		return new Bioquerosene_separacao();
+	}
+	else if(id == "bioquerosene_separacaoAnimation")
+    {
+		return new Bioquerosene_separacaoAnimation("bioquerosene_hidrogenacao");
+	}
+	else if(id == "bioquerosene_hidrogenacao")
+    {
+		return new Bioquerosene_hidrogenacao();
+	}
+	else if(id == "bioquerosene_hidrogenacaoAnimation")
+    {
+		return new Bioquerosene_hidrogenacaoAnimation("finalizacao");
+	}
+	///BIO OLEO
+	///------------------------------------------------------------------------------
 	else if(id == "biooleoAnimation")
     {
-		return new BiooleoAnimation();
+		return new BiooleoAnimation("biooleo_pressurizacao");
+	}
+	else if(id == "biooleo_pressurizacao")
+    {
+		return new Biooleo_pressurizacao();
+	}
+	else if(id == "biooleo_pressurizacaoAnimation")
+    {
+		return new Biooleo_pressurizacaoAnimation("biooleo_desoxigenacao");
+	}
+	else if(id == "biooleo_desoxigenacao")
+    {
+		return new Biooleo_desoxigenacao();
+	}
+	else if(id == "biooleo_desoxigenacaoAnimation")
+    {
+		return new Biooleo_desoxigenacaoAnimation("biooleo_reacao_diesel");
+	}
+	else if(id == "biooleo_reacao_diesel")
+    {
+		return new Biooleo_reacao_diesel();
+	}
+	else if(id == "biooleo_reacao_dieselAnimation")
+    {
+		return new Biooleo_reacao_dieselAnimation("biooleo_isomeros");
+	}
+	else if(id == "biooleo_isomeros")
+    {
+		return new Biooleo_isomeros();
+	}
+	else if(id == "biooleo_isomerosAnimation")
+    {
+		return new Biooleo_isomerosAnimation("biooleo_destilacao");
+	}
+	else if(id == "biooleo_destilacao")
+    {
+		return new Biooleo_destilacao();
+	}
+	else if(id == "biooleo_destilacaoAnimation")
+    {
+		return new Biooleo_destilacaoAnimation("finalizacao");
+	}
+	///------------------------------------------------------------------------------
+	else if(id == "finalizacao")
+    {
+		return new Finalizacao("winner");
+	}
+	else if(id == "winner")
+    {
+		return new Winner("start");
 	}
 	
     return nullptr;

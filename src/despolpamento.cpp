@@ -26,7 +26,7 @@ Despolpamento::Despolpamento(const string& next)
     question = new Question(this, "Despolpa", "Separar a polpa da casca, do endocarpo e da amêndoa?"
 		, button);
     add_child(question);
-    
+        
 }
 
 void
