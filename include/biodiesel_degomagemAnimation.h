@@ -1,5 +1,5 @@
-#ifndef BIODIESEL_PRELIMPEZAANIMATION_H
-#define BIODIESEL_PRELIMPEZAANIMATION_H
+#ifndef BIODIESEL_DEGOMAGEMANIMATION_H
+#define BIODIESEL_DEGOMAGEMANIMATION_H
 
 #include <ijengine/core/level.h>
 #include <ijengine/core/listener.h>
@@ -14,11 +14,11 @@ using namespace std;
 
 class Image;
 
-class Biodiesel_prelimpezaAnimation : public Level
+class Biodiesel_degomagemAnimation : public Level
 {
 public:
-    Biodiesel_prelimpezaAnimation(const string& next = "");
-    ~Biodiesel_prelimpezaAnimation() {}
+    Biodiesel_degomagemAnimation(const string& next = "");
+    ~Biodiesel_degomagemAnimation() {}
 
 private:
     void draw_self();

@@ -42,7 +42,7 @@ TitleScreen::TitleScreen()
     if (title)
     {
         title->align_to(this, Object::CENTER, Object::NONE);
-        title->set_y(80);
+        title->set_y(20);
     }
 
     add_child(title);

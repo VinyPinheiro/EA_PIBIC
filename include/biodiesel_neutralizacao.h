@@ -1,15 +1,15 @@
-#ifndef BIODIESEL_PRELIMPEZA_H
-#define BIODIESEL_PRELIMPEZA_H
+#ifndef BIODIESEL_NEUTRALIZACAO_H
+#define BIODIESEL_NEUTRALIZACAO_H
 
 #include <ijengine/core/level.h>
 #include "question.h"
 
 class Image;
 
-class Biodiesel_prelimpeza : public Level
+class Biodiesel_neutralizacao : public Level
 {
 public:
-  Biodiesel_prelimpeza(const string& next = "");
+  Biodiesel_neutralizacao(const string& next = "");
 
 private:
 	void update_self(unsigned long elapsed);

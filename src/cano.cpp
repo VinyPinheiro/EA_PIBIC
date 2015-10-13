@@ -53,7 +53,7 @@ Cano::Cano(Object *parent, double x, double y, Tipo tipo)
         break;
 	
 	case T:
-        m_animation = new Animation("res/images/cano_T.png", 0, 0, 80, 80, 5, 150);
+        m_animation = new Animation("res/images/cano_T.png", 0, 0, 80, 80, 6, 150);
         break;
 	
     default:

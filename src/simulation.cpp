@@ -52,6 +52,12 @@
 #include "biodieselAnimation.h"
 #include "biodiesel_prelimpeza.h"
 #include "biodiesel_prelimpezaAnimation.h"
+#include "biodiesel_degomagem.h"
+#include "biodiesel_degomagemAnimation.h"
+#include "biodiesel_neutralizacao.h"
+#include "biodiesel_neutralizacaoAnimation.h"
+#include "biodiesel_branqueamento.h"
+#include "biodiesel_branqueamentoAnimation.h"
 #include "bioqueroseneAnimation.h"
 #include "bioquerosene_transesterificacao.h"
 #include "bioquerosene_transesterificacaoAnimation.h"
@@ -83,7 +89,7 @@
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("biodieselAnimation")
+    : Game("biooleo_destilacaoAnimation")
 {
 }
 
@@ -264,7 +270,7 @@ Simulation::load_level(const string& id)
     {
 		return new Biocombustiveis();
 	}
-	///BIOQUEROSENE
+	///BIODIESEL
 	///------------------------------------------------------------------------------
 	else if(id == "biodieselAnimation")
     {
@@ -276,8 +282,32 @@ Simulation::load_level(const string& id)
 	}
 	else if(id == "biodiesel_prelimpezaAnimation")
     {
-		return new Biodiesel_prelimpezaAnimation();
+		return new Biodiesel_prelimpezaAnimation("biodiesel_degomagem");
 	}
+	else if(id == "biodiesel_degomagem")
+    {
+		return new Biodiesel_degomagem();
+	}
+	else if(id == "biodiesel_degomagemAnimation")
+    {
+		return new Biodiesel_degomagemAnimation("biodiesel_neutralizacao");
+	}
+	else if(id == "biodiesel_neutralizacao")
+    {
+		return new Biodiesel_neutralizacao();
+	}
+	else if(id == "biodiesel_neutralizacaoAnimation")
+    {
+		return new Biodiesel_neutralizacaoAnimation("biodiesel_branqueamento");
+	}
+	else if(id == "biodiesel_branqueamento")
+    {
+		return new Biodiesel_branqueamento();
+	}
+	else if(id == "biodiesel_branqueamentoAnimation")
+    {
+		return new Biodiesel_branqueamentoAnimation();
+	}	
 	///BIOQUEROSENE
 	///------------------------------------------------------------------------------
 	else if(id == "bioqueroseneAnimation")

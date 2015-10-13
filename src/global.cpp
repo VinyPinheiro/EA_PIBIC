@@ -7,4 +7,4 @@
  */
 #include "global.h"
 
-unsigned int seedlings_amount = 0;
+unsigned int seedlings_amount = 5;
