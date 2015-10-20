@@ -1,10 +1,3 @@
-/*
- * Implementação da classe Simulation.
- *
- * Autor: Edson Alves
- * Data: 11/05/2015
- * Licença: LGPL. Sem copyright.
- */
 #include "simulation.h"
 #include "titlescreen.h"
 #include "credits.h"
@@ -24,6 +17,7 @@
 #include "empty_truck.h"
 #include "full_truck.h"
 #include "delivery.h"
+//---------------------------------------------------------
 #include "industry.h"
 #include "despolpamento.h"
 #include "despolpamentoAnimation.h"
@@ -47,8 +41,10 @@
 #include "aquecimentoAnimation.h"
 #include "tratamento_termico.h"
 #include "tratamento_termicoAnimation.h"
+//---------------------------------------------------------
 #include "biocombustiveisAnimation.h"
 #include "biocombustiveis.h"
+//---------------------------------------------------------
 #include "biodieselAnimation.h"
 #include "biodiesel_prelimpeza.h"
 #include "biodiesel_prelimpezaAnimation.h"
@@ -58,6 +54,13 @@
 #include "biodiesel_neutralizacaoAnimation.h"
 #include "biodiesel_branqueamento.h"
 #include "biodiesel_branqueamentoAnimation.h"
+#include "biodiesel_desodorizacao.h"
+#include "biodiesel_desodorizacaoAnimation.h"
+#include "biodiesel_armazenamento.h"
+#include "biodiesel_armazenamentoAnimation.h"
+#include "biodiesel_transesterificacao.h"
+#include "biodiesel_transesterificacaoAnimation.h"
+//---------------------------------------------------------
 #include "bioqueroseneAnimation.h"
 #include "bioquerosene_transesterificacao.h"
 #include "bioquerosene_transesterificacaoAnimation.h"
@@ -69,6 +72,7 @@
 #include "bioquerosene_separacaoAnimation.h"
 #include "bioquerosene_hidrogenacao.h"
 #include "bioquerosene_hidrogenacaoAnimation.h"
+//---------------------------------------------------------
 #include "biooleoAnimation.h"
 #include "biooleo_pressurizacao.h"
 #include "biooleo_pressurizacaoAnimation.h"
@@ -80,16 +84,14 @@
 #include "biooleo_isomerosAnimation.h"
 #include "biooleo_destilacao.h"
 #include "biooleo_destilacaoAnimation.h"
-
+//---------------------------------------------------------
 #include "finalizacao.h"
 #include "winner.h"
-
-//#include "filter.h"
 
 #include <ijengine/util/frontend.h>
 
 Simulation::Simulation()
-    : Game("biooleo_destilacaoAnimation")
+    : Game("unb")
 {
 }
 
@@ -306,8 +308,32 @@ Simulation::load_level(const string& id)
 	}
 	else if(id == "biodiesel_branqueamentoAnimation")
     {
-		return new Biodiesel_branqueamentoAnimation();
-	}	
+		return new Biodiesel_branqueamentoAnimation("biodiesel_desodorizacao");
+	}
+	else if(id == "biodiesel_desodorizacao")
+    {
+		return new Biodiesel_desodorizacao();
+	}
+	else if(id == "biodiesel_desodorizacaoAnimation")
+    {
+		return new Biodiesel_desodorizacaoAnimation("biodiesel_armazenamento");
+	}
+	else if(id == "biodiesel_armazenamento")
+    {
+		return new Biodiesel_armazenamento();
+	}
+	else if(id == "biodiesel_armazenamentoAnimation")
+    {
+		return new Biodiesel_armazenamentoAnimation("biodiesel_transesterificacao");
+	}
+	else if(id == "biodiesel_transesterificacao")
+    {
+		return new Biodiesel_transesterificacao();
+	}
+	else if(id == "biodiesel_transesterificacaoAnimation")
+    {
+		return new Biodiesel_transesterificacaoAnimation("finalizacao");
+	}
 	///BIOQUEROSENE
 	///------------------------------------------------------------------------------
 	else if(id == "bioqueroseneAnimation")
